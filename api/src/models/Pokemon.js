@@ -25,21 +25,25 @@ module.exports = (sequelize) => {
     life: {
       type: DataTypes.INTEGER,
     },
-    force: {
+    attack: {
       type: DataTypes.INTEGER,
     },
-
-    defending: {
+    defense: {
       type: DataTypes.INTEGER,
     },
     speed: {
       type: DataTypes.INTEGER,
     },
     height: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.INTEGER,
     },
     weight: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.INTEGER,
+    },
+    createdPokemon: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
     },
   });
 };
