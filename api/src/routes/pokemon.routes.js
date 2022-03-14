@@ -1,13 +1,12 @@
-// //Exporto todas las funcionalidades del controlador del cual se encarga index.
+//De todas las funcionalidades del controlador del cual se encarga index.
 const { Router } = require("express");
 const router = Router();
 const {
   getPokemon,
   getByID,
-  createPokemon,
+  postPokemon,
 } = require("../controller/pokemon.controller");
 router.get("/", getPokemon);
 router.get("/:id", getByID);
-router.post("/create", createPokemon);
-
+router.post("/", postPokemon);
 module.exports = router;
