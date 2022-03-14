@@ -81,6 +81,7 @@ const allPokeId = async (id) => {
   //Primero hago la petision a la API con ese id:
   try {
     if (!id.includes("-")) {
+      //Si tiene un id Typo uuid, salta a buscar a la base de datos.
       //Busco en ID de la API:
       let pokeId = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
       let onePokemon = {
@@ -97,7 +98,7 @@ const allPokeId = async (id) => {
       };
       return onePokemon;
     } else {
-      //Si no lo encuentra desde la API, hago la busqueda en la Base de Datos:
+      //Si salta por el tipo de id, hago la busqueda en la Base de Datos:
       let dbPokemonById = await Pokemon.findByPk(id, {
         include: { model: Types },
       });
@@ -116,7 +117,10 @@ const allPokeId = async (id) => {
       return pokemonIdDb;
     }
   } catch (error) {
-    return `No se encontró un Pokemon para el id: ${id}`;
+    res
+      .status(404)
+      .json({ msg: `No se encontró un Pokemon para el id: ${id}` });
+    console.log(error);
   }
 };
 
