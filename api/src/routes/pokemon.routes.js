@@ -8,5 +8,5 @@ const {
 } = require("../controller/pokemon.controller");
 router.get("/", getPokemon);
 router.get("/:id", getByID);
-router.post("/", postPokemon);
+router.post("/create", postPokemon);
 module.exports = router;
