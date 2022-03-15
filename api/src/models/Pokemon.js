@@ -6,10 +6,11 @@ module.exports = (sequelize) => {
   sequelize.define("Pokemon", {
     id: {
       type: DataTypes.UUID,
-      DefaultValue: UUIDV4,
+      defaultValue: DataTypes.UUIDV4,
       allowNull: false,
-      unique: true,
       primaryKey: true,
+      unique: true,
+      index: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -18,9 +19,9 @@ module.exports = (sequelize) => {
     },
     image: {
       type: DataTypes.TEXT,
-      validate: { isUrl: true },
       allowNull: true,
-      // defaultValue: "https://i.imgur.com/Saga2pd.jpg?1",
+      validate: { isUrl: true },
+      defaultValue: "https://i.imgur.com/fOOL1IV.gif",
     },
     life: {
       type: DataTypes.INTEGER,
@@ -63,6 +64,10 @@ module.exports = (sequelize) => {
         min: 1,
         max: 1000, //El pokemon más pesado es Cosmoem con 999kg.
       },
+    },
+    types: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     createdPokemon: {
       type: DataTypes.BOOLEAN,
