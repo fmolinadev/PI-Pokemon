@@ -36,33 +36,46 @@ let apiPokemon = async () => {
 
 const dbPokemon = async () => {
   try {
-    return await Pokemon.findAll({
-      attributes: ["id", "image", "name", "createdPokemon"],
+    const dbInfo = await Pokemon.findAll({
+      attributes: [
+        "id",
+        "image",
+        "name",
+        "types",
+        "createdPokemon",
+        "life",
+        "attack",
+        "defense",
+        "speed",
+        "weight",
+        "height",
+      ],
       include: { model: Types },
       through: {
         attributes: [],
       },
-    }).then((p) =>
-      p.map((e) => {
-        return {
-          id: e.id,
-          name: e.name,
-          image: e.image,
-          createdPokemon: e.createdPokemon,
-          types: e.types.map((t) => t.name),
-          life: e.data.stats[0].base_stat,
-          attack: e.data.stats[1].base_stat,
-          defense: e.data.stats[2].base_stat,
-          speed: e.data.stats[5].base_stat,
-          height: e.data.height,
-          weight: e.data.weight,
-        };
-      })
-    );
+    });
+    const pokemonFromDB = dbInfo.map((e) => {
+      return {
+        id: e.dataValues.id,
+        name: e.dataValues.name,
+        life: e.dataValues.life,
+        attack: e.dataValues.attack,
+        defense: e.dataValues.defense,
+        speed: e.dataValues.speed,
+        weight: e.dataValues.weight,
+        height: e.dataValues.height,
+        image: e.dataValues.image,
+        types: e.dataValues.types,
+        createdPokemon: true,
+      };
+    });
+    return pokemonFromDB;
   } catch (error) {
     console.log(error);
   }
 };
+
 //Concateno todos los pokemones:
 const allPokemon = async () => {
   try {
@@ -81,7 +94,7 @@ const allPokeId = async (id) => {
   //Primero hago la petision a la API con ese id:
   try {
     if (!id.includes("-")) {
-      //Si tiene un id Typo uuid, salta a buscar a la base de datos.
+      //Si tiene un id UUID salta a buscar a la base de datos.
       //Busco en ID de la API:
       let pokeId = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
       let onePokemon = {
@@ -99,14 +112,21 @@ const allPokeId = async (id) => {
       return onePokemon;
     } else {
       //Si salta por el tipo de id, hago la busqueda en la Base de Datos:
-      let dbPokemonById = await Pokemon.findByPk(id, {
-        include: { model: Types },
+      let dbPokemonById = await Pokemon.findOne({
+        where: { id: id },
+        include: {
+          model: Types,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
       });
       let pokemonIdDb = {
         id: dbPokemonById.id,
         image: dbPokemonById.id,
         name: dbPokemonById.name,
-        types: dbPokemonById.types.map((t) => t.name),
+        types: dbPokemonById.types.map((t) => t.type.name),
         life: dbPokemonById.life,
         attack: dbPokemonById.attack,
         defense: dbPokemonById.defense,
@@ -114,7 +134,7 @@ const allPokeId = async (id) => {
         height: dbPokemonById.height,
         weight: dbPokemonById.weight,
       };
-      return pokemonIdDb;
+      return res.send(pokemonIdDb);
     }
   } catch (error) {
     res
