@@ -1,6 +1,7 @@
 const axios = require("axios");
 const { Pokemon, Types } = require("../db");
 const URL = "https://pokeapi.co/api/v2/pokemon/";
+const URL_TYPES = "https://pokeapi.co/api/v2/type";
 
 //Traigo la info de la API:
 let apiPokemon = async () => {
@@ -17,12 +18,6 @@ let apiPokemon = async () => {
           id: pokemonSaved.data.id,
           image: pokemonSaved.data.sprites.other.dream_world.front_default,
           types: pokemonSaved.data.types.map((e) => e.type.name),
-          life: pokemonSaved.data.stats[0].base_stat,
-          attack: pokemonSaved.data.stats[1].base_stat,
-          defense: pokemonSaved.data.stats[2].base_stat,
-          speed: pokemonSaved.data.stats[5].base_stat,
-          height: pokemonSaved.data.height,
-          weight: pokemonSaved.data.weight,
         });
       });
       return pokemonApi;
@@ -37,19 +32,7 @@ let apiPokemon = async () => {
 const dbPokemon = async () => {
   try {
     const dbInfo = await Pokemon.findAll({
-      attributes: [
-        "id",
-        "image",
-        "name",
-        "types",
-        "createdPokemon",
-        "life",
-        "attack",
-        "defense",
-        "speed",
-        "weight",
-        "height",
-      ],
+      attributes: ["id", "name", "image"],
       include: { model: Types },
       through: {
         attributes: [],
@@ -57,17 +40,10 @@ const dbPokemon = async () => {
     });
     const pokemonFromDB = dbInfo.map((e) => {
       return {
-        id: e.dataValues.id,
+        id: e.dataValues.id + "db",
         name: e.dataValues.name,
-        life: e.dataValues.life,
-        attack: e.dataValues.attack,
-        defense: e.dataValues.defense,
-        speed: e.dataValues.speed,
-        weight: e.dataValues.weight,
-        height: e.dataValues.height,
         image: e.dataValues.image,
-        types: e.dataValues.types,
-        createdPokemon: true,
+        types: e.types,
       };
     });
     return pokemonFromDB;
@@ -92,10 +68,43 @@ const allPokemon = async () => {
 
 const allPokeId = async (id) => {
   //Primero hago la petision a la API con ese id:
+
+  if (!id) {
+    res.send("Error: Falta el número de ID para buscar. ¡Intenta de nuevo!");
+  } else if (id.length > 4) {
+    res.send(`Error: El ID debe ser más corto.`);
+  } else if (!id === /[A-Za-z0-9]/) {
+    res.send(
+      `El ID solo esta compuesto por un numero o un numero y la sigla "db`
+    );
+  }
   try {
-    if (!id.includes("-")) {
-      //Si tiene un id UUID salta a buscar a la base de datos.
-      //Busco en ID de la API:
+    if (id.includes("db")) {
+      try {
+        id.replace(/[0-9]/g, "").trim().slice(0, -2);
+        id = parseInt(id);
+        console.log(id);
+
+        let dbPokemonById = await Pokemon.findByPk(id, { include: Types });
+
+        let pokemonIdDb = {
+          id: dbPokemonById.id,
+          image: dbPokemonById.image,
+          name: dbPokemonById.name,
+          // types: dbPokemonById.types.map((t) => t.type.name)
+          life: dbPokemonById.life,
+          attack: dbPokemonById.attack,
+          defense: dbPokemonById.defense,
+          speed: dbPokemonById.speed,
+          height: dbPokemonById.height,
+          weight: dbPokemonById.weight,
+        };
+        console.log(pokemonIdDb);
+        if (pokemonIdDb) return pokemonIdDb;
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
       let pokeId = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
       let onePokemon = {
         id: pokeId.data.id,
@@ -110,41 +119,40 @@ const allPokeId = async (id) => {
         weight: pokeId.data.weight,
       };
       return onePokemon;
-    } else {
-      //Si salta por el tipo de id, hago la busqueda en la Base de Datos:
-      let dbPokemonById = await Pokemon.findOne({
-        where: { id: id },
-        include: {
-          model: Types,
-          attributes: ["name"],
-          through: {
-            attributes: [],
-          },
-        },
-      });
-      let pokemonIdDb = {
-        id: dbPokemonById.id,
-        image: dbPokemonById.id,
-        name: dbPokemonById.name,
-        types: dbPokemonById.types.map((t) => t.type.name),
-        life: dbPokemonById.life,
-        attack: dbPokemonById.attack,
-        defense: dbPokemonById.defense,
-        speed: dbPokemonById.speed,
-        height: dbPokemonById.height,
-        weight: dbPokemonById.weight,
-      };
-      return res.send(pokemonIdDb);
     }
   } catch (error) {
-    res
+    console.log(error);
+    return res
       .status(404)
       .json({ msg: `No se encontró un Pokemon para el id: ${id}` });
-    console.log(error);
+  }
+};
+
+//   Funcion que trae los tipos de Pokemones  //
+
+const getAllTypes = async (req, res) => {
+  try {
+    const getUrlType = await axios.get(URL_TYPES);
+    //Llamado a la ruta Types de la API.
+    allTypes = getUrlType.data.results;
+
+    allTypes.forEach((e) => {
+      Types.findOrCreate({
+        //Busca el type y si no encuentra, lo crea.
+        where: { name: e.name },
+      });
+    });
+
+    //Traigo el resto de los Types
+    const allPokemonDbTypes = await Types.findAll();
+    return allPokemonDbTypes;
+  } catch (error) {
+    return { error: "Ouch! We have an error server." };
   }
 };
 
 module.exports = {
   allPokemon,
   allPokeId,
+  getAllTypes,
 };
