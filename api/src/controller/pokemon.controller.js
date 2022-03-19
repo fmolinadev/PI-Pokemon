@@ -100,10 +100,9 @@ const postPokemon = async (req, res) => {
       where: { id: newPokemon.id },
       include: Types,
     });
-    pokeIdDb = pokeIdDb.toJSON();
     pokeIdDb.id = pokeIdDb.id + `db`;
 
-    //CHECK del pokemos + iddb
+    //CHECK del pokemon + iddb
     // console.log(pokeIdDb);
 
     return res
