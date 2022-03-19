@@ -16,7 +16,9 @@ let apiPokemon = async () => {
         return (p = {
           name: pokemonSaved.data.name,
           id: pokemonSaved.data.id,
-          image: pokemonSaved.data.sprites.other.dream_world.front_default,
+          image:
+            pokemonSaved.data.sprites.versions["generation-v"]["black-white"]
+              .animated.front_default,
           types: pokemonSaved.data.types.map((e) => e.type.name),
         });
       });
@@ -32,21 +34,12 @@ let apiPokemon = async () => {
 const dbPokemon = async () => {
   try {
     const dbInfo = await Pokemon.findAll({
+      include: Types,
+      through: { attributes: ["name"] },
       attributes: ["id", "name", "image"],
-      include: { model: Types },
-      through: {
-        attributes: [],
-      },
     });
-    const pokemonFromDB = dbInfo.map((e) => {
-      return {
-        id: e.dataValues.id + "db",
-        name: e.dataValues.name,
-        image: e.dataValues.image,
-        types: e.types,
-      };
-    });
-    return pokemonFromDB;
+
+    if (dbInfo) return dbInfo;
   } catch (error) {
     console.log(error);
   }
@@ -58,9 +51,47 @@ const allPokemon = async () => {
     let apiPokemonInfo = await apiPokemon();
     let dbPokemonInfo = await dbPokemon();
     let totalPokemonInfo = [...apiPokemonInfo, ...dbPokemonInfo];
+    if (!totalPokemonInfo) {
+      return "No hay pokemones para mostrar.";
+    }
     return totalPokemonInfo;
   } catch (error) {
     return error;
+  }
+};
+
+//Buscar por nombre:
+
+const searchByName = async (name) => {
+  // console.log("--FLAG SEARCH NOMBRE--");
+  let findNamePokemon = await Pokemon.findOne({
+    where: {
+      name: name.toLowerCase(),
+    },
+    include: Types,
+    through: { attributes: ["name"] },
+    attributes: ["id", "name", "image"],
+  });
+  // console.log("--FLAG SEARCH NAME DB--");
+  if (findNamePokemon) {
+    return findNamePokemon;
+  } else {
+    // console.log("--FLAG SEARCH NAME API--");
+
+    let pokeNameAPI = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon/${name}`
+    );
+    let nameAPIPokemon = {
+      id: pokeNameAPI.data.id,
+      image:
+        pokeNameAPI.data.sprites.versions["generation-v"]["black-white"]
+          .animated.front_default,
+      name: pokeNameAPI.data.name,
+      types: pokeNameAPI.data.types.map((t) => t.type.name),
+    };
+    // console.log(nameAPIPokemon);
+
+    return nameAPIPokemon;
   }
 };
 
@@ -83,24 +114,25 @@ const allPokeId = async (id) => {
       try {
         id.replace(/[0-9]/g, "").trim().slice(0, -2);
         id = parseInt(id);
-        console.log(id);
+        // console.log(id);
 
-        let dbPokemonById = await Pokemon.findByPk(id, { include: Types });
+        let dbPokemonById = await Pokemon.findByPk(id, {
+          include: Types,
+          through: { attributes: ["name"] },
+          attributes: [
+            "id",
+            "name",
+            "image",
+            "life",
+            "attack",
+            "defense",
+            "speed",
+            "height",
+            "weight",
+          ],
+        });
 
-        let pokemonIdDb = {
-          id: dbPokemonById.id,
-          image: dbPokemonById.image,
-          name: dbPokemonById.name,
-          // types: dbPokemonById.types.map((t) => t.type.name)
-          life: dbPokemonById.life,
-          attack: dbPokemonById.attack,
-          defense: dbPokemonById.defense,
-          speed: dbPokemonById.speed,
-          height: dbPokemonById.height,
-          weight: dbPokemonById.weight,
-        };
-        console.log(pokemonIdDb);
-        if (pokemonIdDb) return pokemonIdDb;
+        if (dbPokemonById) return dbPokemonById;
       } catch (error) {
         console.log(error);
       }
@@ -108,7 +140,9 @@ const allPokeId = async (id) => {
       let pokeId = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
       let onePokemon = {
         id: pokeId.data.id,
-        image: pokeId.data.sprites.other.dream_world.front_default,
+        image:
+          pokeId.data.sprites.versions["generation-v"]["black-white"].animated
+            .front_default,
         name: pokeId.data.name,
         types: pokeId.data.types.map((t) => t.type.name),
         life: pokeId.data.stats[0].base_stat,
@@ -153,6 +187,7 @@ const getAllTypes = async (req, res) => {
 
 module.exports = {
   allPokemon,
+  searchByName,
   allPokeId,
   getAllTypes,
 };
