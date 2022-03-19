@@ -1,34 +1,32 @@
-const { allPokemon, allPokeId } = require("../utils/utils");
+const { allPokemon, allPokeId, searchByName } = require("../utils/utils");
 const { Pokemon, Types } = require("../db");
 
-////////////////////GET POR NOMBRE O TODOS LOS POKEMONES///////////////////////
+//////////////////////GET NAME O TODOS/////////////////////////
 
 const getPokemon = async (req, res) => {
-  try {
-    const { name } = req.query; //Si recibo name, lo busco.
-    //Lo busco en todos los pokemones concatenados desde mi UTILS. Se de donde viene por la propiedad "createPokemon".
-    let infoPokemon = await allPokemon();
-    if (name) {
-      let pokemonName = await infoPokemon.filter(
-        (e) => e.name.toLowerCase() === name.toLowerCase()
-      );
-      if (pokemonName.length === 0) {
-        res.status(404).send("No se encontro ningun Pokemon con ese nombre");
-      } else {
-        return res.status(200).json(pokemonName);
-      }
-    } else {
-      //Si no recibo nombre, devuelvo todos los pokemones.
-      return res.status(200).json(infoPokemon);
+  const { name } = req.query;
+  if (!name) {
+    // console.log("--FLAG SIN NOMBRE--");
+    let getAllPokemon = await allPokemon();
+    res.status(200).json(getAllPokemon);
+    //GET a todos Pokemon: OK
+  } else {
+    try {
+      let infoNamePokemon = await searchByName(name);
+      // console.log("--FLAG CON NOMBRE EN CONTROLER--");
+      res.status(200).json({ infoNamePokemon });
+      // console.log(infoNamePokemon);
+    } catch (error) {
+      res
+        .status(404)
+        .send(`Error: No existe el pokemon llamado ${name}. ¡Intenta crearlo!`);
     }
-  } catch (error) {
-    res.status(404).send(error);
   }
 };
+
 /////////////////////////////GET X ID ///////////////////////////////7///
 
-//Si el GET es de un personaje por el ID que lo recibo por Params o Query:
-async function getByID(req, res) {
+const getID = async (req, res) => {
   const { id } = req.params;
   try {
     let infoPokemon = await allPokeId(id);
@@ -36,12 +34,22 @@ async function getByID(req, res) {
   } catch (error) {
     res.status(404).send(error);
   }
-}
+};
 //////////////////////////////POST/////////////////////////////////////
 
 const postPokemon = async (req, res) => {
-  const { name, life, image, attack, defense, speed, height, weight, types } =
-    req.body;
+  const {
+    name,
+    life,
+    image,
+    attack,
+    defense,
+    speed,
+    height,
+    weight,
+    typeA,
+    typeB,
+  } = req.body;
   //Valido todo:
   if (!Object.keys(req.body).length)
     return res
@@ -73,19 +81,34 @@ const postPokemon = async (req, res) => {
       speed: speed,
       height: height,
       weight: weight,
-      types,
-    });
-    //Tipo de PK:
-    let pokemonTypeBD = await Types.findAll({
-      where: {
-        name: types,
-      },
     });
     //Le paso el Types:
-    await newPokemon.setTypes(pokemonTypeBD);
+    if (typeA) {
+      let pokemonType1BD = await Types.findAll({ where: { name: typeA } });
+      await newPokemon.addTypes(pokemonType1BD);
+    }
+    if (typeB) {
+      let pokemonType2BD = await Types.findAll({ where: { name: typeB } });
+      await newPokemon.addTypes(pokemonType2BD);
+    } else if (!typeA && !typeB) {
+      return res.send(
+        `El Pokemon ${newPokemon.name} debe tener al menos un tipo. Verifica los datos ingresados.`
+      );
+    }
+
+    let pokeIdDb = await Pokemon.findOne({
+      where: { id: newPokemon.id },
+      include: Types,
+    });
+    pokeIdDb = pokeIdDb.toJSON();
+    pokeIdDb.id = pokeIdDb.id + `db`;
+
+    //CHECK del pokemos + iddb
+    // console.log(pokeIdDb);
+
     return res
       .status(201)
-      .send({ msg: `El Pokemon ${newPokemon.name} fue creado con éxito!.` });
+      .send({ msg: `El Pokemon ${pokeIdDb.name} fue creado con éxito!.` });
   } catch (error) {
     res.status(404).send(error);
     console.log(error);
@@ -93,6 +116,6 @@ const postPokemon = async (req, res) => {
 };
 module.exports = {
   getPokemon,
-  getByID,
+  getID,
   postPokemon,
 };
