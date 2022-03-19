@@ -14,7 +14,7 @@ const getPokemon = async (req, res) => {
     try {
       let infoNamePokemon = await searchByName(name);
       // console.log("--FLAG CON NOMBRE EN CONTROLER--");
-      res.status(200).json({ infoNamePokemon });
+      res.status(200).json(infoNamePokemon);
       // console.log(infoNamePokemon);
     } catch (error) {
       res
