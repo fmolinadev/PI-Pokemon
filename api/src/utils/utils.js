@@ -34,7 +34,20 @@ let apiPokemon = async () => {
 const dbPokemon = async () => {
   try {
     const dbInfo = await Pokemon.findAll({
-      include: Types,
+      /* include: [
+        { model: Types, attributes: { exclude: ["id", "pokemon_types"] } },
+      ], */
+      include: [
+        {
+          model: Types,
+          as: "Types",
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+
       through: { attributes: ["name"] },
       attributes: ["id", "name", "image"],
     });
@@ -68,7 +81,16 @@ const searchByName = async (name) => {
     where: {
       name: name.toLowerCase(),
     },
-    include: Types,
+    include: [
+      {
+        model: Types,
+        as: "Types",
+        attributes: ["name"],
+        through: {
+          attributes: [],
+        },
+      },
+    ],
     through: { attributes: ["name"] },
     attributes: ["id", "name", "image"],
   });
