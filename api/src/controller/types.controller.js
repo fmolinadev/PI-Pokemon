@@ -21,7 +21,7 @@ const getAllTypes = async (req, res) => {
     const allPokemonDbTypes = await Types.findAll();
     res.status(200).send(allPokemonDbTypes);
   } catch (error) {
-    res.status(404).send({ error: "Ouch! We have an error server." });
+    res.status(404).send({ error: "Ouch! Ocurrio un error. " });
   }
 };
 module.exports = getAllTypes;
