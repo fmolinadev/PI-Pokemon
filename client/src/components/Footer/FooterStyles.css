@@ -1,0 +1,19 @@
+.footer-container{
+display: flex;
+flex-direction: column;
+  align-items: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  background-color: #181818;
+  
+}
+.footer-span{
+  font-weight: 600;
+  color: #F6CF3A;
+  margin-top: 15px;
+  font-size: 12px;
+}
