@@ -16,9 +16,7 @@ let apiPokemon = async () => {
         return (p = {
           name: pokemonSaved.data.name,
           id: pokemonSaved.data.id,
-          image:
-            pokemonSaved.data.sprites.versions["generation-v"]["black-white"]
-              .animated.front_default,
+          image: pokemonSaved.data.sprites.other.home.front_default,
           types: pokemonSaved.data.types.map((e) => e.type.name),
         });
       });
@@ -105,9 +103,7 @@ const searchByName = async (name) => {
     );
     let nameAPIPokemon = {
       id: pokeNameAPI.data.id,
-      image:
-        pokeNameAPI.data.sprites.versions["generation-v"]["black-white"]
-          .animated.front_default,
+      image: pokeNameAPI.data.sprites.other.home.front_default,
       name: pokeNameAPI.data.name,
       types: pokeNameAPI.data.types.map((t) => t.type.name),
     };
@@ -139,7 +135,17 @@ const allPokeId = async (id) => {
         // console.log(id);
 
         let dbPokemonById = await Pokemon.findByPk(id, {
-          include: Types,
+          include: [
+            {
+              model: Types,
+              as: "Types",
+              attributes: ["name"],
+              through: {
+                attributes: [],
+              },
+            },
+          ],
+
           through: { attributes: ["name"] },
           attributes: [
             "id",
@@ -162,9 +168,7 @@ const allPokeId = async (id) => {
       let pokeId = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
       let onePokemon = {
         id: pokeId.data.id,
-        image:
-          pokeId.data.sprites.versions["generation-v"]["black-white"].animated
-            .front_default,
+        image: pokeId.data.sprites.other.home.front_default,
         name: pokeId.data.name,
         types: pokeId.data.types.map((t) => t.type.name),
         life: pokeId.data.stats[0].base_stat,
