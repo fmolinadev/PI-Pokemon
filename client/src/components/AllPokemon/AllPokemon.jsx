@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Pokemon } from "../Pokemon/Pokemon";
 import { Aside as Filter } from "../Aside/Aside";
-import { getAllPokemon, getTypes } from "../../actions/pokemon.actions";
+import {
+  getAllPokemon,
+  getTypes,
+  resetDetail,
+} from "../../actions/pokemon.actions";
 import { Loading } from "../Loading/Loading";
 import { ErrorPage } from "../ErrorPage/ErrorPage";
 import { NavBar } from "../Nav/NavBar";
@@ -28,24 +32,21 @@ export function AllPokemon() {
     if (counterPokemon !== 1) {
       setCounterPokemon(counterPokemon - 1);
     }
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const next = () => {
     if (counterPokemon !== indexPages) {
       setCounterPokemon(counterPokemon + 1);
     }
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const begin = () => {
     setCounterPokemon(1);
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const end = () => {
     setCounterPokemon(indexPages);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   if (counterPokemon > indexPages) {
@@ -53,6 +54,7 @@ export function AllPokemon() {
   }
 
   useEffect(() => {
+    dispatch(resetDetail());
     dispatch(getAllPokemon());
     dispatch(getTypes());
   }, [dispatch]);
