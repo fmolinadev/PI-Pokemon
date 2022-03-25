@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: true,
         validate: { isUrl: true },
-        defaultValue: "https://i.imgur.com/fOOL1IV.gif",
+        defaultValue: "https://imgur.com/R1WxMTs",
       },
       life: {
         type: DataTypes.INTEGER,
