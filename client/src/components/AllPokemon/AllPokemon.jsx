@@ -11,6 +11,7 @@ import { Loading } from "../Loading/Loading";
 import { ErrorPage } from "../ErrorPage/ErrorPage";
 import { NavBar } from "../Nav/NavBar";
 import "./AllPokemonStyles.css";
+import { Link } from "react-router-dom";
 
 export function AllPokemon() {
   let dispatch = useDispatch();
@@ -74,18 +75,20 @@ export function AllPokemon() {
         <Filter />
         <div className="main-pokemons-card">
           {pokemonData &&
-            pokemonData.map((p) => (
-              <Pokemon
-                key={p.id}
-                name={p.name}
-                types={p.types}
-                image={p.image}
-                health={p.life}
-                attack={p.attack}
-                defense={p.defense}
-                speed={p.speed}
-                id={p.id}
-              />
+            pokemonData.map((p, index) => (
+              <Link key={index} to={"/pokemon/" + p.id}>
+                <Pokemon
+                  key={index}
+                  name={p.name}
+                  types={p.types}
+                  image={p.image}
+                  health={p.life}
+                  attack={p.attack}
+                  defense={p.defense}
+                  speed={p.speed}
+                  id={p.id}
+                />
+              </Link>
             ))}
         </div>
         <div className="pagination">
