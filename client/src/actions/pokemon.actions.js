@@ -10,11 +10,10 @@ export const FILTER_BY_ORIGEN = "FILTER_BY_ORIGEN";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_ATTACK = "ORDER_BY_ATTACK";
 export const RESET = "RESET";
+export const RESET_DETAIL = "RESET_DETAIL";
 export const SET_LOADING = "SET_LOADING";
 //Rutas del Back::
 export const URL_ALL_POKEMON = "http://localhost:3001/pokemon/index";
-export const URL_GET_BY_NAME = "http://localhost:3001/pokemon/index?name=";
-export const URL_GET_BY_ID = "http://localhost:3001/pokemon/";
 export const URL_POST_POKEMON = "http://localhost:3001/pokemon/create";
 export const URL_TYPES = "http://localhost:3001/types";
 
@@ -39,8 +38,10 @@ export function getAllPokemon() {
 export function getPokemonName(name) {
   return async function (dispatch) {
     try {
-      let jsonPokemonName = await axios.get(URL_GET_BY_NAME + name);
-      // console.log(jsonPokemonName.data);
+      let jsonPokemonName = await axios.get(
+        `http://localhost:3001/pokemon/index?name=${name}`
+      );
+      console.log(jsonPokemonName.data);
       return dispatch({
         type: GET_BY_NAME,
         payload: jsonPokemonName.data,
@@ -54,7 +55,7 @@ export function getPokemonName(name) {
 
 export function getPokemonId(id) {
   return async function (dispatch) {
-    let jsonPokemonID = await axios.get(URL_GET_BY_ID + id);
+    let jsonPokemonID = await axios.get(`http://localhost:3001/pokemons/${id}`);
     return dispatch({
       type: GET_DETAIL,
       payload: jsonPokemonID.data,
@@ -82,6 +83,12 @@ export function postPokemon(payload) {
 export function reset() {
   return {
     type: RESET,
+  };
+}
+
+export function resetDetail() {
+  return {
+    type: RESET_DETAIL,
   };
 }
 
