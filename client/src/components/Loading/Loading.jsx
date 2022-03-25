@@ -1,10 +1,11 @@
 import React from "react";
-
-export function AppLoading() {
+import imageLoading from "../../assets/Image Loading.gif";
+import "./LoadingStyles.css";
+export function Loading() {
   return (
-    <div>
-      <img src="" alt="loaging" />
-      <span>Loading Pokemons...</span>
+    <div class="loader-container">
+      <img class="loading-img" src={imageLoading} alt="loaging" />
+      <h3 class="text-loading">Cargando Pokemones...</h3>
     </div>
   );
 }

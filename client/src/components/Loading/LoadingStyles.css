@@ -1,0 +1,19 @@
+.loader-container{
+     margin:auto;
+	 display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.loading-img{
+position: relative;
+  align-items: center;
+  align-self: center;
+  width: 280px;
+  height: 280px;
+}
+
+.text-loading{
+    color: #FFFF;
+  text-align: center;
+}
