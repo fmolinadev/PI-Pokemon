@@ -5,7 +5,7 @@ border-radius: 5px;
   font-weight: 600;
   font-family: "Rubik", sans-serif;
   color: #ffffff;
-  background: #104890;
+  background: #1a58a5;
   border: none;
   cursor: pointer;
   padding: 9px;
@@ -26,13 +26,13 @@ font-family: "Rubik", sans-serif;
 background: none;
 padding: 9px;
 border: solid 1px;
-border-color: #104890;
+border-color: #1a58a5;
 border-radius: 5px;
 
 
 }
 
 .input-search::placeholder {
-  color: #949494;
+  color: #7a7979;
   font-style: italic;
 }
