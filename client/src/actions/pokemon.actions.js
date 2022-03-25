@@ -12,7 +12,7 @@ export const ORDER_BY_ATTACK = "ORDER_BY_ATTACK";
 export const RESET = "RESET";
 export const RESET_DETAIL = "RESET_DETAIL";
 export const SET_LOADING = "SET_LOADING";
-//Rutas del Back::
+//Rutas del Back:
 export const URL_ALL_POKEMON = "http://localhost:3001/pokemon/index";
 export const URL_POST_POKEMON = "http://localhost:3001/pokemon/create";
 export const URL_TYPES = "http://localhost:3001/types";
@@ -55,7 +55,7 @@ export function getPokemonName(name) {
 
 export function getPokemonId(id) {
   return async function (dispatch) {
-    let jsonPokemonID = await axios.get(`http://localhost:3001/pokemons/${id}`);
+    let jsonPokemonID = await axios.get(`http://localhost:3001/pokemon/${id}`);
     return dispatch({
       type: GET_DETAIL,
       payload: jsonPokemonID.data,
