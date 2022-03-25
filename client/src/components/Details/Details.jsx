@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Loading } from "../Loading/Loading";
+import { ErrorPage } from "../ErrorPage/ErrorPage";
 import { NavBar } from "../Nav/NavBar";
 import { Footer } from "../Footer/Footer";
 
@@ -15,57 +16,72 @@ export function Details() {
   const onePokemon = useSelector((state) => state.detail);
 
   useEffect(() => {
-    dispatch(resetDetail());
     dispatch(getPokemonId(params.id));
+    dispatch(resetDetail());
   }, [dispatch, params.id]);
 
-  if (onePokemon.length !== 0) {
+  if (!onePokemon.name) {
     return (
-      <div className="background">
+      <div>
+        <div>
+          <NavBar />
+        </div>
+        <div>
+          <Loading />;
+        </div>
+      </div>
+    );
+  } else if (onePokemon.length !== 0) {
+    return (
+      <div class="background">
         <NavBar />
         <div>
-          <div className="cardsDetails">
+          <div class="cardsDetails">
             <div>
-              <h3 className="pokeName">{onePokemon.name}</h3>
+              <h3 class="pokeName">{onePokemon.name}</h3>
               <img
                 src={onePokemon.image}
                 alt={onePokemon.name}
-                className="pokeImage"
+                class="pokeImage"
               />
             </div>
-            <div className="types">
+            <div class="types">
               {onePokemon.types &&
                 onePokemon.types.map((e) => (
                   <p key={onePokemon.id}>{e.name}</p>
                 ))}
             </div>
-            <div className="description">
+            <div class="description">
               <div>
-                <h4>{`Vida: ${onePokemon.life}`}</h4>
+                <h4>{`Vida: ${onePokemon.life} hp`}</h4>
               </div>
               <div>
-                <h4>{`Ataque: ${onePokemon.attack}`}</h4>
+                <h4>{`Ataque: ${onePokemon.attack} Pw`}</h4>
               </div>
               <div>
-                <h4>{`Defensa: ${onePokemon.defense}`}</h4>
+                <h4>{`Defensa: ${onePokemon.defense} Pw`}</h4>
               </div>
               <div>
-                <h4>{`Velocidad: ${onePokemon.speed}`}</h4>
+                <h4>{`Velocidad: ${onePokemon.speed} km/h`}</h4>
               </div>
               <div>
-                <h4>{`Altura: ${onePokemon.height}`}</h4>
+                <h4>{`Altura: ${onePokemon.height} cm`}</h4>
               </div>
               <div>
-                <h4>{`Peso: ${onePokemon.weight}`}</h4>
+                <h4>{`Peso: ${onePokemon.weight} kg`}</h4>
               </div>
             </div>
           </div>
           <div>
-            <button className="button-home">
-              <Link to="/pokemon">Volver al inicio</Link>
+            <button class="button-home">
+              <Link to="/pokemon" class="linked">
+                Volver al inicio
+              </Link>
             </button>
-            <button className="button-home">
-              <Link to="/create">Crear un Pokémon</Link>
+            <button class="button-home">
+              <Link to="/create" class="linked">
+                Crear un Pokémon
+              </Link>
             </button>
           </div>
         </div>
@@ -77,7 +93,7 @@ export function Details() {
       <div>
         <NavBar />
         <div>
-          <Loading />
+          <ErrorPage />
         </div>
         <Footer />
       </div>

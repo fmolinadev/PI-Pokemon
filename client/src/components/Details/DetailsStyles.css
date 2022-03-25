@@ -1,200 +1,80 @@
-
 .background{
     background-image: url(../../assets/Pueblo_Paleta_Back.png);
       background-repeat: no-repeat;
-    background-position: 80% 0;
+    background-position: 70% 0;
     background-size: cover;
 }
 
 .cardsDetails{
-    background: rgba(255, 255, 255, 0.6);
-    max-width: 750px;
-    height: 630px;
+    background: rgba(255, 255, 255, 0.808);
+    max-width: 700px;
+    height: 480px;
     margin-right: 30%;
     margin-left: 30%;
     display:inherit;
-    box-shadow: 2px 2px .4em rgb(168, 166, 166), -1px 0 .4em rgb(223, 223, 223);
-    margin-top: 20px;
+    box-shadow: 4px 4px .6em #104890, -5px 0 .6em #F6CF3A;
+    margin-top: 1px;
 }
 
 .pokeName{
+    font-family: "Rubik", sans-serif;
     text-align: center;
     font-weight: bold;
     font-size: 25px;
-    animation: color-change 2.5s infinite;
+    margin-top: 14px;
+    padding-top: 16px;
 }
-
-@keyframes color-change {
-    0% { color: rgb(44, 44, 44); }
-    25% {color: rgb(170, 170, 170);}
-    50% { color: rgb(248, 255, 255); }
-    75% { color: rgb(170, 170, 170); }
-    100% { color: rgb(44, 44, 44); }
-  }
 
 .types{
     display: flex;
     flex-direction: column;
     margin-left: 82%;
-    margin-top: 19%;
+    margin-top: 3px;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 10px;
 }
 
 .pokeImage {
-    max-width: 350px;
-    max-height: 350px;
-    margin-left: 10%;
-    margin-top: -2%;
-    position: fixed;
+    max-width: 200px;
+    max-height: 200px;
+   margin: auto;
+   padding-left: 180px;
+    position: relative;
 }
 
 .description{
+    font-family: "Rubik", sans-serif;
+  text-decoration: "inherit";
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-column-gap: 10px;
-    grid-row-gap: 7px;
-    margin-top: 13%;
+    grid-template-rows: 1fr 0.2fr;
+    grid-column-gap: 3px;
+    grid-row-gap: 2px;
     margin-left: 23%;
 }
 
 .button-home{
-    padding: 14px 28px 14px 28px;
-    font-weight:bold;
-    background: linear-gradient(50deg, #36d1dc, #5b86e5);
-    border-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E %3Cstyle%3Epath%7Banimation:stroke 5s infinite linear%3B%7D%40keyframes stroke%7Bto%7Bstroke-dashoffset:776%3B%7D%7D%3C/style%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%232d3561' /%3E%3Cstop offset='25%25' stop-color='%23c05c7e' /%3E%3Cstop offset='50%25' stop-color='%23f3826f' /%3E%3Cstop offset='100%25' stop-color='%23ffb961' /%3E%3C/linearGradient%3E %3Cpath d='M1.5 1.5 l97 0l0 97l-97 0 l0 -97' stroke-linecap='square' stroke='url(%23g)' stroke-width='3' stroke-dasharray='388'/%3E %3C/svg%3E") 2;
+    padding: 12px 25px 12px 25px;
+    font-size: 12px;
+  font-weight: 600;
+    font-family: "Rubik", sans-serif;
+    text-emphasis-color: #FFFF;
+    background: #1a58a5;
     margin-left: 45%;
     margin-top: 1.5%;
+    border-radius: 5px;
+    border: none;
+  cursor: pointer;
+  padding: 9px;
+  transition: 0.3s ease-in-out;
 }
 
-@media (max-width : 1250px) {
-    .cardsDetails{
-        background: rgba(255, 255, 255, 0.6);
-        max-width: 750px;
-        height: 630px;
-        margin-left: 13%;
-        margin-right: 13%;
-        display:inherit;
-        box-shadow: 2px 2px .4em rgb(168, 166, 166), -1px 0 .4em rgb(223, 223, 223);
-        margin-top: 20px;
-    }
-
-    .pokeImage {
-        display: flex;
-        max-width: 350px;
-        max-height: 350px;
-        margin-left: 17%;
-        margin-top: -2%;
-        position: fixed;
-    }
-
-    .description{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        grid-column-gap: 0px;
-        grid-row-gap: 7px;
-        margin-top: 105px;
-        margin-left: 180px;
-    }
-
-    .types{
-        display: flex;
-        flex-direction: column;
-        margin-left: 82%;
-        margin-top: 19%;
-        font-weight: bold;
-        font-size: 18px;
-    }
-
-    .button-home{
-        padding: 14px 28px 14px 28px;
-        font-weight:bold;
-        background: linear-gradient(50deg, #36d1dc, #5b86e5);
-        border-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E %3Cstyle%3Epath%7Banimation:stroke 5s infinite linear%3B%7D%40keyframes stroke%7Bto%7Bstroke-dashoffset:776%3B%7D%7D%3C/style%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%232d3561' /%3E%3Cstop offset='25%25' stop-color='%23c05c7e' /%3E%3Cstop offset='50%25' stop-color='%23f3826f' /%3E%3Cstop offset='100%25' stop-color='%23ffb961' /%3E%3C/linearGradient%3E %3Cpath d='M1.5 1.5 l97 0l0 97l-97 0 l0 -97' stroke-linecap='square' stroke='url(%23g)' stroke-width='3' stroke-dasharray='388'/%3E %3C/svg%3E") 2;
-        margin-left: 42%;
-        margin-top: 1.5%;
-    }
+.linked{
+text-decoration: none;
+color: #FFFF;
 }
 
-@media (max-width : 800px) {
-    .description{
-        grid-gap: 0px 55px;
-        margin-top: 100px;
-        margin-left: 25%;
-        margin-right: 25%;
-        padding-bottom: auto;
-    }
-
-    .pokeImage {
-        max-width: 280px;
-        max-height: 280px;
-        margin-left: auto;
-        margin-right: auto;
-        position: relative;
-        margin-bottom: auto;
-    }
-
-    .types{
-        flex-direction: row;
-        justify-content: space-evenly;
-        margin-bottom: -85px;
-        margin-left: 20%;
-        margin-right: 20%;
-        margin-top: auto;
-    }
-
-    .button-home{
-        margin-left: 37%;
-        margin-top: 1.5%;
-    }
-}
-
-@media (max-width : 450px) {
-    .detailsBackground{
-        margin-top: 50px;
-    }
-    
-    .cardsDetails{
-        max-width: 750px;
-        max-height: 500px;
-        margin-right: 10%;
-        margin-left: 10%;
-    }
-    
-    .pokeName{
-        font-size: 23px;
-    }
-    .types{
-        flex-direction: row;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 1%;
-        text-align: center;
-    }
-    
-    .pokeImage {
-        max-width: 190px;
-        max-height: 190px;
-        margin-left: 16%;
-        margin-top: -14%;
-    }
-    
-    .description{
-        grid-column-gap: 5px;
-        grid-row-gap: 4px;
-        margin-top: 35%;
-        margin-left: auto;
-        margin-right: auto;
-        font-size: 14px;
-        text-align: center;
-    }
-    
-    .button-home{
-        padding: 10px 24px 10px 24px;
-        margin-left: 100px;
-        margin-top: 7%;
-    }
-    
+.linked:hover{
+   color: #F6CF3A;
+   
 }
