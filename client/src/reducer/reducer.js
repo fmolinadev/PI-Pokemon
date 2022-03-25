@@ -10,6 +10,7 @@ import {
   ORDER_BY_NAME,
   ORDER_BY_ATTACK,
   RESET,
+  RESET_DETAIL,
   SET_LOADING,
 } from "../actions/pokemon.actions";
 
@@ -17,9 +18,9 @@ const initialState = {
   pokemons: [],
   types: [],
   filter: [],
-  order: [],
   detail: {},
   backUp: [],
+  errorLoader: false,
 };
 
 function rootReducer(state = initialState, action) {
@@ -28,7 +29,7 @@ function rootReducer(state = initialState, action) {
       return { ...state, pokemons: action.payload, backUp: action.payload }; //retorno la copia del estado y paso el action.
 
     case GET_BY_NAME:
-      return { ...state, pokemons: action.payload };
+      return { ...state, backUp: action.payload };
 
     case GET_DETAIL:
       return { ...state, detail: action.payload };
@@ -56,7 +57,7 @@ function rootReducer(state = initialState, action) {
             });
       return {
         ...state,
-        pokemons: typesFiltered,
+        backUp: typesFiltered,
       };
 
     case FILTER_BY_ORIGEN:
@@ -74,12 +75,12 @@ function rootReducer(state = initialState, action) {
     case ORDER_BY_NAME:
       let pokemonSort =
         action.payload === "aToZ"
-          ? state.pokemons.sort(function (a, b) {
+          ? state.backUp.sort(function (a, b) {
               if (a.name > b.name) return 1;
               if (b.name > a.name) return -1;
               return 0;
             })
-          : state.pokemons.sort(function (a, b) {
+          : state.backUp.sort(function (a, b) {
               if (a.name > b.name) return -1;
 
               if (b.name > a.name) return 1;
@@ -88,28 +89,34 @@ function rootReducer(state = initialState, action) {
             });
       return {
         ...state,
-        pokemons: pokemonSort,
+        backUp: pokemonSort,
       };
 
     case ORDER_BY_ATTACK:
       let pokemonOrderByAttack =
         action.payload === "minToMax"
-          ? state.pokemons.sort(function (a, b) {
+          ? state.backUp.sort(function (a, b) {
               if (a.attack > b.attack) return 1;
               if (b.attack > a.attack) return -1;
               return 0;
             })
-          : state.pokemons.sort(function (a, b) {
+          : state.backUp.sort(function (a, b) {
               if (a.attack > b.attack) return -1;
               if (b.attack > a.attack) return 1;
               return 0;
             });
       return {
         ...state,
-        pokemons: pokemonOrderByAttack,
+        backUp: pokemonOrderByAttack,
       };
 
     case RESET:
+      return {
+        ...state,
+        backUp: state.pokemons,
+      };
+
+    case RESET_DETAIL:
       return {
         ...state,
         detail: {},
