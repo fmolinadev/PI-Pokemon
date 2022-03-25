@@ -53,7 +53,7 @@ export function Aside() {
   }
 
   //Orden por fuerza:
-  function handleFilterAttack(e) {
+  function handleOrderByAttack(e) {
     e.preventDefault();
     dispatch(orderByAttack(e.target.value));
     setOrder(`Order by ${e.target.value}`);
@@ -84,7 +84,7 @@ export function Aside() {
           <select
             class="select"
             defaultValue="attack"
-            onChange={(e) => handleFilterAttack(e)}
+            onChange={(e) => handleOrderByAttack(e)}
           >
             <option class="options" value="attack" disabled>
               Attack
