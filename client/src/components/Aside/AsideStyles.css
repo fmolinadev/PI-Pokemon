@@ -1,0 +1,54 @@
+.aside-container{
+    width: 250px;
+    height: 100%;
+    float: left;
+    padding-left: 28px;
+}
+
+.label{
+color: #1a58a5;
+font-size: 15px;
+font-weight: 700;
+font-family: "Rubik", sans-serif;
+
+}
+
+.select{
+width:200px;
+color: #1b1b1b;
+font-size: 12px;
+font-weight: 600;
+font-family: "Rubik", sans-serif;
+background: none;
+padding: 9px;
+margin-top: 5px;
+border: solid 1px;
+border-color: #1a58a5;
+border-radius: 5px;
+}
+
+.options{
+color: #1b1b1b;
+font-size: 15px;
+font-weight: 500;
+font-family: "Rubik", sans-serif;
+text-align: center;
+}
+
+.btn-reload{
+border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: "Rubik", sans-serif;
+  color: #ffffff;
+  background: #1a58a5;
+  border: none;
+  cursor: pointer;
+  padding: 9px;
+  margin-top: 10px;
+  transition: 0.3s ease-in-out;
+}
+
+.btn-reload:hover{
+    color: #F6CF3A;
+}
