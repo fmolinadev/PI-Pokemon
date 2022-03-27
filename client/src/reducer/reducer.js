@@ -26,7 +26,12 @@ const initialState = {
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case GET_ALL:
-      return { ...state, pokemons: action.payload, backUp: action.payload }; //retorno la copia del estado y paso el action.
+      return {
+        ...state,
+        pokemons: action.payload,
+        backUp: action.payload,
+        filter: action.payload,
+      }; //retorno la copia del estado y paso el action.
 
     case GET_BY_NAME:
       return { ...state, backUp: action.payload };
@@ -38,13 +43,10 @@ function rootReducer(state = initialState, action) {
       return { ...state, pokemons: state.pokemons.concat(action.payload) };
 
     case GET_TYPES:
-      return {
-        ...state,
-        types: action.payload,
-      };
+      return { ...state, types: action.payload };
 
     case FILTER_BY_TYPES:
-      const pokemons = state.backUp;
+      const pokemons = state.filter;
       const typesFiltered =
         action.payload === "allTypes"
           ? pokemons
