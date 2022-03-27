@@ -39,14 +39,14 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         validate: {
           min: 1,
-          max: 100,
+          max: 350,
         },
       },
       defense: {
         type: DataTypes.INTEGER,
         validate: {
           min: 1,
-          max: 100,
+          max: 350,
         },
       },
       speed: {
