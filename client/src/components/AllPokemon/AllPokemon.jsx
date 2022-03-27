@@ -99,7 +99,7 @@ export function AllPokemon() {
             Anterior
           </button>
           <p>
-            {counterPokemon} / {indexPages}
+            {counterPokemon} de {indexPages}
           </p>
           <button onClick={next} className="pagination-button p">
             Proximo
