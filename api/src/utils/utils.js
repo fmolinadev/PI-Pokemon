@@ -74,42 +74,46 @@ const allPokemon = async () => {
 //Buscar por nombre:
 
 const searchByName = async (name) => {
-  // console.log("--FLAG SEARCH NOMBRE--");
-  let findNamePokemon = await Pokemon.findOne({
-    where: {
-      name: name.toLowerCase(),
-    },
-    include: [
-      {
-        model: Types,
-        as: "Types",
-        attributes: ["name"],
-        through: {
-          attributes: [],
-        },
+  try {
+    // console.log("--FLAG SEARCH NOMBRE--");
+    let findNamePokemon = await Pokemon.findOne({
+      where: {
+        name: name.toLowerCase(),
       },
-    ],
-    through: { attributes: ["name"] },
-    attributes: ["id", "name", "image"],
-  });
-  // console.log("--FLAG SEARCH NAME DB--");
-  if (findNamePokemon) {
-    return findNamePokemon;
-  } else {
-    // console.log("--FLAG SEARCH NAME API--");
+      include: [
+        {
+          model: Types,
+          as: "Types",
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+      through: { attributes: ["name"] },
+      attributes: ["id", "name", "image"],
+    });
+    // console.log("--FLAG SEARCH NAME DB--");
+    if (findNamePokemon) {
+      return findNamePokemon;
+    } else {
+      // console.log("--FLAG SEARCH NAME API--");
 
-    let pokeNameAPI = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon/${name}`
-    );
-    let nameAPIPokemon = {
-      id: pokeNameAPI.data.id,
-      image: pokeNameAPI.data.sprites.other.home.front_default,
-      name: pokeNameAPI.data.name,
-      types: pokeNameAPI.data.types.map((t) => t.type.name),
-    };
-    // console.log(nameAPIPokemon);
+      let pokeNameAPI = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon/${name}`
+      );
+      let nameAPIPokemon = {
+        id: pokeNameAPI.data.id,
+        image: pokeNameAPI.data.sprites.other.home.front_default,
+        name: pokeNameAPI.data.name,
+        types: pokeNameAPI.data.types.map((t) => t.type.name),
+      };
+      // console.log(nameAPIPokemon);
 
-    return nameAPIPokemon;
+      return nameAPIPokemon;
+    }
+  } catch (error) {
+    return res.send({ alert: `"No se encuentra el Pokémon llamado ${name}` });
   }
 };
 
@@ -207,7 +211,7 @@ const getAllTypes = async (req, res) => {
     const allPokemonDbTypes = await Types.findAll();
     return allPokemonDbTypes;
   } catch (error) {
-    return { error: "Ouch! We have an error server." };
+    return { error: "Ouch! Ocurrio un error en el servidor." };
   }
 };
 
