@@ -40,7 +40,7 @@ export function Details() {
             <div>
               <h3 class="pokeName">{onePokemon.name}</h3>
               <img
-                src={onePokemon.image}
+                src={onePokemon.image || "https://imgur.com/R1WxMTs"}
                 alt={onePokemon.name}
                 class="pokeImage"
               />
