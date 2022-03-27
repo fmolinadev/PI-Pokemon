@@ -29,8 +29,10 @@ export function getAllPokemon() {
         //Recordar que el payload es la info que se usa para modificar los estados, y el type hace que se identifique a la action.
       });
     } catch (error) {
-      console.log(error);
-      return error.message;
+      console.log(error.message);
+      return alert(
+        "Oh no! Hubo un error al cargar la informacion. Intenta en unos minutos"
+      );
     }
   };
 }
@@ -47,22 +49,27 @@ export function getPokemonName(name) {
         payload: jsonPokemonName.data,
       });
     } catch (error) {
-      console.log(error);
-      return error.message;
+      return alert(`Ups! No existe un Pokémon con ese nombre.`);
     }
   };
 }
 
 export function getPokemonId(id) {
   return async function (dispatch) {
-    let jsonPokemonID = await axios.get(`http://localhost:3001/pokemon/${id}`);
-    return dispatch({
-      type: GET_DETAIL,
-      payload: jsonPokemonID.data,
-    });
+    try {
+      let jsonPokemonID = await axios.get(
+        `http://localhost:3001/pokemon/${id}`
+      );
+      return dispatch({
+        type: GET_DETAIL,
+        payload: jsonPokemonID.data,
+      });
+    } catch (error) {
+      console.log(error.message);
+      return alert(`No encontramos Pokemon con el ID ${id}.`);
+    }
   };
 }
-
 export function postPokemon(payload) {
   return async function (dispatch) {
     try {
@@ -134,9 +141,7 @@ export function getTypes() {
       });
     } catch (error) {
       console.log(error);
-      return alert(
-        "Hubo error al cargar los Tipos de Pokemon. ¡Intenta de nuevo!"
-      );
+      return error;
     }
   };
 }
