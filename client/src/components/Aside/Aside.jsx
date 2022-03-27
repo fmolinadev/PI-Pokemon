@@ -11,7 +11,7 @@ import {
 } from "../../actions/pokemon.actions";
 import "./AsideStyles.css";
 
-export function Aside() {
+export function Aside(setCounterPokemon) {
   const [, setOrder] = useState("");
   const [, setTypes] = useState("allPokemon");
 
@@ -120,6 +120,7 @@ export function Aside() {
             class="select"
             defaultValue="Types"
             onChange={(e) => handleFilterByTypes(e)}
+            id="type-select"
           >
             <option class="options" value="Types" disabled>
               Types
@@ -140,6 +141,9 @@ export function Aside() {
                   </option>
                 ))}
           </select>
+          <div>
+            <span>AVA VAN LOS SELECTED</span>
+          </div>
           <button class="btn-reload" onClick={(e) => handleReset(e)}>
             Reload
           </button>
