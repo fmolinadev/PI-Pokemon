@@ -16,7 +16,11 @@ export function SearchBar() {
   //Handle del serach
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(getPokemonName(name));
+    if (!name || name === "" || !name.trim().length) {
+      setName("");
+      return;
+    }
+    dispatch(getPokemonName(name.toLowerCase()));
   }
 
   return (
