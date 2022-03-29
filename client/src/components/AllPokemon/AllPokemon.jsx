@@ -9,7 +9,6 @@ import {
 } from "../../actions/pokemon.actions";
 import { Loading } from "../Loading/Loading";
 import { ErrorPage } from "../ErrorPage/ErrorPage";
-import { NavBar } from "../Nav/NavBar";
 import "./AllPokemonStyles.css";
 import { Link } from "react-router-dom";
 
@@ -63,7 +62,6 @@ export function AllPokemon() {
   if (!pokemonData) {
     return (
       <div>
-        <NavBar />
         <div>
           <ErrorPage />
         </div>
@@ -83,7 +81,7 @@ export function AllPokemon() {
                   types={p.types}
                   image={p.image}
                   health={p.life}
-                  attack={p.attack}
+                  // attack={p.attack}
                   defense={p.defense}
                   speed={p.speed}
                   id={p.id}
