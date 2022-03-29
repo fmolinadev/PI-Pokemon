@@ -8,12 +8,12 @@ export function LandingPage() {
     <div class="landing-container">
       <section class="content">
         <h1 class="title">¿Quieres conocer más sobre tu Pokémon favorito?</h1>
-        <Link to="/pokemon">
+        <Link to="/pokemon/index">
           <button class="btn">¡Hazlo ahora!</button>
         </Link>
       </section>
-      <Link to="/pokemon">
-        <img class="img" src={imgLanding} alt="dogs landing" />
+      <Link to="/pokemon/index">
+        <img class="img" src={imgLanding} alt="landing" />
       </Link>
     </div>
   );
