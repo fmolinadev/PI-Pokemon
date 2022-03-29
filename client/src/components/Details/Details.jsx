@@ -27,30 +27,28 @@ export function Details() {
           <NavBar />
         </div>
         <div>
-          <Loading />;
+          <Loading />
         </div>
       </div>
     );
   } else if (onePokemon.length !== 0) {
+    console.log(onePokemon);
     return (
       <div class="background">
         <NavBar />
         <div>
           <div class="cardsDetails">
             <div>
-              <h3 class="pokeName">{onePokemon.name}</h3>
+              <h3 class="pokeName">
+                {`#${onePokemon.id}:`} {onePokemon.name}
+              </h3>
               <img
-                src={onePokemon.image || "https://imgur.com/R1WxMTs"}
+                src={onePokemon.image}
                 alt={onePokemon.name}
                 class="pokeImage"
               />
             </div>
-            <div class="types">
-              {onePokemon.types &&
-                onePokemon.types.map((e) => (
-                  <p key={onePokemon.id}>{e.name}</p>
-                ))}
-            </div>
+            <div class="types">{onePokemon.types}</div>
             <div class="description">
               <div>
                 <h4>{`Vida: ${onePokemon.life} hp`}</h4>
@@ -74,7 +72,7 @@ export function Details() {
           </div>
           <div>
             <button class="button-home">
-              <Link to="/pokemon" class="linked">
+              <Link to="/pokemon/index" class="linked">
                 Volver al inicio
               </Link>
             </button>
