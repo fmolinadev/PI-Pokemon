@@ -10,7 +10,7 @@ export function NavBar() {
     <div class="nav-container">
       <nav>
         <div class="all-li">
-          <Link to="/pokemon" style={{ textDecoration: "inherit" }}>
+          <Link to="/pokemon/index" style={{ textDecoration: "inherit" }}>
             <li class="link-route">Home</li>
           </Link>
           <Link to="/create" style={{ textDecoration: "inherit" }}>
