@@ -20,7 +20,6 @@ const initialState = {
   filter: [],
   detail: {},
   backUp: [],
-  errorLoader: false,
 };
 
 function rootReducer(state = initialState, action) {
@@ -34,7 +33,20 @@ function rootReducer(state = initialState, action) {
       }; //retorno la copia del estado y paso el action.
 
     case GET_BY_NAME:
-      return { ...state, backUp: action.payload };
+      const nameSearched = state.pokemons.filter((e) => {
+        return e.name === action.payload;
+      });
+      if (nameSearched.length !== 0) {
+        return {
+          ...state,
+          backUp: nameSearched,
+        };
+      } else {
+        return {
+          ...state,
+          pokemons: false,
+        };
+      }
 
     case GET_DETAIL:
       return { ...state, detail: action.payload };
@@ -50,28 +62,28 @@ function rootReducer(state = initialState, action) {
       const typesFiltered =
         action.payload === "allTypes"
           ? pokemons
-          : pokemons.filter((e) => {
-              if (typeof e.types[0] !== "string") {
-                e.types = e.types.map((t) => t.name);
-              }
+          : pokemons.filter(
+              (e) =>
+                e.types.map((type) => type)[0] === action.payload ||
+                e.types.map((type) => type)[1] === action.payload
+            );
 
-              return e.types.includes(action.payload);
-            });
       return {
         ...state,
         backUp: typesFiltered,
       };
 
     case FILTER_BY_ORIGEN:
-      const filterOrigin = state.backUp;
+      const filterOrigin = state.filter;
       const filterByOrigin =
-        action.payload === "pokemonsCreated"
-          ? filterOrigin.filter((e) => e.pokemonsCreated)
-          : filterOrigin.filter((e) => !e.pokemonsCreated);
+        action.payload === "createdPokemon"
+          ? filterOrigin.filter((e) => e.createdPokemon === true)
+          : action.payload === "allOrigin"
+          ? state.filter
+          : filterOrigin.filter((e) => !e.createdPokemon);
       return {
         ...state,
-        pokemons:
-          action.payload === "allOrigin" ? state.backUp : filterByOrigin,
+        backUp: filterByOrigin,
       };
 
     case ORDER_BY_NAME:
