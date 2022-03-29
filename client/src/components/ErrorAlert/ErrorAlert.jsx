@@ -19,7 +19,7 @@ export function ErrorAlert({ msg = "Error. Return to home.", code }) {
       <p class="error">Error</p>
       <span class="spanError">{msg}</span>
       <div onClick={handleGoHome()}>
-        <Link to="/pokemon">
+        <Link to="/pokemon/index">
           <button class="btn-goHome">Ir a la pagina principal.</button>
         </Link>
       </div>
