@@ -12,7 +12,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
-        <Route exact path="/pokemon" element={<Home />} />
+        <Route exact path="/pokemon/index" element={<Home />} />
         <Route exact path="/pokemon/:id" element={<Details />} />
         <Route exact path="/create" element={<Create />} />
         {/* <Route exact path="/about" element={<AbautMe />} /> */}
