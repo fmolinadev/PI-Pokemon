@@ -111,7 +111,7 @@ export function Aside(setCounterPokemon) {
             <option class="options" value="pokemonApi">
               Poke Api
             </option>
-            <option class="options" value="pokemonsCreated">
+            <option class="options" value="createdPokemon">
               Created
             </option>
           </select>
@@ -141,9 +141,6 @@ export function Aside(setCounterPokemon) {
                   </option>
                 ))}
           </select>
-          <div>
-            <span>AVA VAN LOS SELECTED</span>
-          </div>
           <button class="btn-reload" onClick={(e) => handleReset(e)}>
             Reload
           </button>
