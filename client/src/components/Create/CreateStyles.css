@@ -68,32 +68,8 @@
 
 .errors{
     color: red;
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 500;
     position: absolute;
-    margin-left: 15%;
-}
-
-#name{
-    width: 310px;
-    height: 20px;
-    margin-left: -8.5%;
-    margin-top: 5%;
-    position: fixed;
-}
- #attack{
-    width: 310px;
-    height: 20px;
-    margin-left: 22%;
-    margin-top: 5%;
-    position: fixed;
-}
-
- #defense{
-    width: 310px;
-    height: 20px;
-    position: fixed;
-    margin-left: -8.5%;
-    margin-top: 10.9%;
 }
 

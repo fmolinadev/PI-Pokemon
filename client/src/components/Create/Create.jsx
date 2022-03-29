@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { NavBar } from "../Nav/NavBar";
 import { Footer } from "../Footer/Footer";
 import {
@@ -16,7 +16,7 @@ import { validate } from "./validateForm";
 
 export function Create() {
   const dispatch = useDispatch();
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
   const stateTypes = useSelector((state) => state.types);
   const totalPokemon = useSelector((state) => state.pokemons);
 
@@ -65,6 +65,7 @@ export function Create() {
           typeA: input.typeA,
           typeB: input.typeB,
         };
+        console.log(newPokemon);
         dispatch(postPokemon(newPokemon));
       }
 
@@ -79,8 +80,10 @@ export function Create() {
         typeA: ``,
         typeB: ``,
       });
-      return alert(`El Pokémon fue creado con éxito.`);
-      //   navigate("/pokemon");
+      return (
+        alert(`El Pokémon fue creado con éxito.`),
+        navigate(`/pokemon/index?=name${input.name}`)
+      );
     } catch (error) {
       console.log(error);
       return alert(
@@ -97,8 +100,8 @@ export function Create() {
       <h1 class="title">¡Crea un nuevo Pokémon!</h1>
       <form class="form" onSubmit={handleSubmit}>
         <div class="info-form">
-          <label>
-            Nombre
+          <div>
+            <label>Nombre</label>
             <input
               onChange={handleInputChange}
               value={input.name}
@@ -112,9 +115,9 @@ export function Create() {
                 <div id="name">{errors.name}</div>
               </div>
             )}
-          </label>
-          <label>
-            Vida
+          </div>
+          <div>
+            <label>Vida</label>
             <input
               onChange={handleInputChange}
               value={input.life}
@@ -128,7 +131,7 @@ export function Create() {
                 <div>{errors.life}</div>
               </div>
             )}
-          </label>
+          </div>
           <label>
             Ataque
             <input
@@ -141,12 +144,12 @@ export function Create() {
             />
             {errors.attack && (
               <div class="errors">
-                <div id="attack">{errors.attack}</div>
+                <div>{errors.attack}</div>
               </div>
             )}
           </label>
-          <label>
-            Defensa
+          <div>
+            <label>Defensa</label>
             <input
               onChange={handleInputChange}
               value={input.defense}
@@ -157,12 +160,12 @@ export function Create() {
             />
             {errors.defense && (
               <div class="errors">
-                <div id="defense">{errors.defense}</div>
+                <div>{errors.defense}</div>
               </div>
             )}
-          </label>
-          <label>
-            Velocidad
+          </div>
+          <div>
+            <label>Velocidad</label>
             <input
               onChange={handleInputChange}
               value={input.speed}
@@ -176,9 +179,9 @@ export function Create() {
                 <div>{errors.speed}</div>
               </div>
             )}
-          </label>
-          <label>
-            Peso
+          </div>
+          <div>
+            <label>Peso</label>
             <input
               onChange={handleInputChange}
               value={input.weight}
@@ -192,9 +195,9 @@ export function Create() {
                 <div>{errors.weight}</div>
               </div>
             )}
-          </label>
-          <label>
-            Tamaño
+          </div>
+          <div>
+            <label>Tamaño</label>
             <input
               onChange={handleInputChange}
               value={input.height}
@@ -208,9 +211,9 @@ export function Create() {
                 <div>{errors.height}</div>
               </div>
             )}
-          </label>
-          <label>
-            Imagen
+          </div>
+          <div>
+            <label>Imagen</label>
             <input
               onChange={handleInputChange}
               value={input.image}
@@ -223,30 +226,35 @@ export function Create() {
                 <div>{errors.image}</div>
               </div>
             )}
-          </label>
-
-          <label>Tipos:</label>
-          <select
-            value={input.typeA}
-            name="typeA"
-            onChange={handleInputChange}
-            required
-          >
-            <option value="typeA">Primer tipo</option>
-            {stateTypes.map((x) => (
-              <option value={x.name} key={x.id}>
-                {x.name}
-              </option>
-            ))}
-          </select>
-          <select value={input.typeB} name="typeB" onChange={handleInputChange}>
-            <option value="StypeB">Segundo tipo</option>
-            {stateTypes.map((e) => (
-              <option value={e.name} key={e.id}>
-                {e.name}
-              </option>
-            ))}
-          </select>
+          </div>
+          <div>
+            <label>Tipos</label>
+            <select
+              value={input.typeA}
+              name="typeA"
+              onChange={handleInputChange}
+              required
+            >
+              <option value="typeA">Primer tipo</option>
+              {stateTypes.map((x) => (
+                <option value={x.name} key={x.id}>
+                  {x.name}
+                </option>
+              ))}
+            </select>
+            <select
+              value={input.typeB}
+              name="typeB"
+              onChange={handleInputChange}
+            >
+              <option value="StypeB">Segundo tipo</option>
+              {stateTypes.map((e) => (
+                <option value={e.name} key={e.id}>
+                  {e.name}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
         <button class="btn-create" type="submit">
           Crear

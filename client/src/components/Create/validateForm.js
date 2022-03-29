@@ -19,7 +19,7 @@ export function validate(input) {
 
   //Image:
 
-  if (input.image && !urlOK.test(input.image)) {
+  if (input.image && urlOK.test(input.image)) {
     errors.image = "Debes ingresar una URL valida";
   }
 
