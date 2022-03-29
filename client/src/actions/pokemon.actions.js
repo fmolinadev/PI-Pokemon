@@ -40,13 +40,13 @@ export function getAllPokemon() {
 export function getPokemonName(name) {
   return async function (dispatch) {
     try {
-      let jsonPokemonName = await axios.get(
-        `http://localhost:3001/pokemon/index?name=${name}`
-      );
-      console.log(jsonPokemonName.data);
+      if (name.search(/^[a-zA-Zñáéíóúü]*$/)) {
+        return alert("El nombre a buscar solo debe contener letras.");
+      }
+
       return dispatch({
         type: GET_BY_NAME,
-        payload: jsonPokemonName.data,
+        payload: name,
       });
     } catch (error) {
       return alert(`Ups! No existe un Pokémon con ese nombre.`);
@@ -102,10 +102,17 @@ export function resetDetail() {
 //Filtros y ordenamientos:
 
 export function filterByOrigin(payload) {
-  return {
-    type: FILTER_BY_ORIGEN,
-    payload: payload,
-  };
+  try {
+    return {
+      type: FILTER_BY_ORIGEN,
+      payload: payload,
+    };
+  } catch (error) {
+    console.log(error.message);
+    return alert(
+      "Oh no! Hubo un error al cargar Pokemones por origen. ¡Intenta crear uno!"
+    );
+  }
 }
 
 export function orderByName(payload) {
@@ -141,14 +148,21 @@ export function getTypes() {
       });
     } catch (error) {
       console.log(error);
-      return error;
+      return alert(
+        "Algo salio mal al cargar los Types. Intenta de nuevo más tarde"
+      );
     }
   };
 }
 
 export function filterByTypes(payload) {
-  return {
-    type: FILTER_BY_TYPES,
-    payload,
-  };
+  try {
+    return {
+      type: FILTER_BY_TYPES,
+      payload,
+    };
+  } catch (error) {
+    console.log(error);
+    return alert("Error: falló el filtro de este Type. ¡Intenta de nuevo!");
+  }
 }
