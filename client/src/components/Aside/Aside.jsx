@@ -21,8 +21,6 @@ export function Aside(setCounterPokemon) {
 
   useEffect(() => {
     dispatch(resetDetail());
-    dispatch(getTypes());
-    dispatch(getAllPokemon());
   }, [dispatch]);
 
   //Funcion de reseteo a los filtros/orden:
@@ -36,13 +34,13 @@ export function Aside(setCounterPokemon) {
   function handleFilterOrigin(e) {
     e.preventDefault();
     dispatch(filterByOrigin(e.target.value));
-    setTypes(e.target.value);
   }
 
   //Filtro por los Typos:
   function handleFilterByTypes(e) {
     e.preventDefault();
     dispatch(filterByTypes(e.target.value));
+    setTypes(e.target.value);
   }
 
   //Orden alfebetico:
