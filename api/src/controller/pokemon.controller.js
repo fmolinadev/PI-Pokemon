@@ -36,7 +36,7 @@ const getID = async (req, res) => {
   }
 };
 //////////////////////////////POST/////////////////////////////////////
-var idBase = 1126;
+var idReference = 1126;
 const postPokemon = async (req, res) => {
   const {
     name,
@@ -73,7 +73,7 @@ const postPokemon = async (req, res) => {
       return res.json({ msg: "El Pokemon ya existe. Intenta crear otro." });
 
     let newPokemon = await Pokemon.create({
-      id: ++idBase,
+      id: ++idReference,
       name: name.toLowerCase(),
       image: image,
       life: life,
@@ -101,14 +101,14 @@ const postPokemon = async (req, res) => {
       where: { id: newPokemon.id },
       include: Types,
     });
-    pokeIdDb.id = pokeIdDb.id + `db`; */
+    pokeIdDb.id = pokeIdDb.id + `db`;
 
-    //CHECK del pokemon + iddb
+    //CHECK del pokemon + iddb */
     // console.log(pokeIdDb);
 
     return res
       .status(201)
-      .send({ msg: `El Pokemon  ${newPokemon.name} fue creado con éxito!.` });
+      .send({ msg: `El Pokemon ${newPokemon.name} fue creado con éxito!.` });
   } catch (error) {
     res.status(404).send(error);
     console.log(error);
