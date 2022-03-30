@@ -64,8 +64,9 @@ export function Create() {
           weight: input.weight,
           typeA: input.typeA,
           typeB: input.typeB,
+          createdPokemon: true,
         };
-        console.log(newPokemon);
+        // console.log(newPokemon);
         dispatch(postPokemon(newPokemon));
       }
 
@@ -81,8 +82,7 @@ export function Create() {
         typeB: ``,
       });
       return (
-        alert(`El Pokémon fue creado con éxito.`),
-        navigate(`/pokemon/index?=name${input.name}`)
+        alert(`El Pokémon fue creado con éxito.`), navigate(`/pokemon/index`)
       );
     } catch (error) {
       console.log(error);
@@ -125,6 +125,7 @@ export function Create() {
               type="number"
               min="1"
               placeholder="Vida..."
+              required
             />
             {errors.life && (
               <div class="errors">
@@ -141,6 +142,7 @@ export function Create() {
               type="number"
               min="1"
               placeholder="Poder de ataque..."
+              required
             />
             {errors.attack && (
               <div class="errors">
@@ -157,6 +159,7 @@ export function Create() {
               type="number"
               min="1"
               placeholder="Poder de defensa.."
+              required
             />
             {errors.defense && (
               <div class="errors">
@@ -173,6 +176,7 @@ export function Create() {
               type="number"
               min="1"
               placeholder="Inserta su velocidad..."
+              required
             />
             {errors.speed && (
               <div class="errors">
@@ -189,6 +193,7 @@ export function Create() {
               type="number"
               min="1"
               placeholder="Inserta el peso (en kg)"
+              required
             />
             {errors.weight && (
               <div class="errors">
@@ -205,6 +210,7 @@ export function Create() {
               type="number"
               min="1"
               placeholder="Inserta el tamaño (cm)"
+              required
             />
             {errors.height && (
               <div class="errors">
@@ -236,9 +242,9 @@ export function Create() {
               required
             >
               <option value="typeA">Primer tipo</option>
-              {stateTypes.map((x) => (
-                <option value={x.name} key={x.id}>
-                  {x.name}
+              {stateTypes.map((t) => (
+                <option value={t.name} key={t.id}>
+                  {t.name}
                 </option>
               ))}
             </select>
@@ -248,9 +254,9 @@ export function Create() {
               onChange={handleInputChange}
             >
               <option value="StypeB">Segundo tipo</option>
-              {stateTypes.map((e) => (
-                <option value={e.name} key={e.id}>
-                  {e.name}
+              {stateTypes.map((t) => (
+                <option value={t.name} key={t.id}>
+                  {t.name}
                 </option>
               ))}
             </select>
