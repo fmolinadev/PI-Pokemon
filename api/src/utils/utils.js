@@ -33,9 +33,6 @@ let apiPokemon = async () => {
 const dbPokemon = async () => {
   try {
     const dbInfo = await Pokemon.findAll({
-      /* include: [
-        { model: Types, attributes: { exclude: ["id", "pokemon_types"] } },
-      ], */
       include: [
         {
           model: Types,
@@ -46,12 +43,18 @@ const dbPokemon = async () => {
           },
         },
       ],
-
       through: { attributes: ["name"] },
       attributes: ["id", "name", "image", "attack"],
     });
 
-    if (dbInfo) return dbInfo;
+    if (dbInfo)
+      return dbInfo.map((pokemon) => {
+        const typesArrayStr = pokemon.dataValues.types.map((p) => p.name);
+        return {
+          ...pokemon.dataValues,
+          types: typesArrayStr,
+        };
+      });
   } catch (error) {
     console.log(error);
   }
@@ -96,7 +99,9 @@ const searchByName = async (name) => {
     });
     // console.log("--FLAG SEARCH NAME DB--");
     if (findNamePokemon) {
-      return findNamePokemon;
+      let { dataValues } = findNamePokemon;
+      dataValues.types = dataValues.types.map((t) => t.name);
+      return dataValues;
     } else {
       // console.log("--FLAG SEARCH NAME API--");
 
@@ -157,8 +162,12 @@ const allPokeId = async (id) => {
             "weight",
           ],
         });
-
-        if (dbPokemonById) return dbPokemonById;
+        // console.log(dbPokemonById);
+        //Mi types es: [[types][types]] WTF!
+        const { dataValues } = dbPokemonById;
+        // console.log(dataValues)
+        dataValues.types = dataValues.types.map((t) => t.name);
+        if (dbPokemonById) return dataValues;
       } catch (error) {
         console.log(error);
       }
