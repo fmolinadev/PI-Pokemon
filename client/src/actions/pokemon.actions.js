@@ -60,12 +60,12 @@ export function getPokemonId(id) {
       let jsonPokemonID = await axios.get(
         `http://localhost:3001/pokemon/${id}`
       );
+      console.log(jsonPokemonID);
       return dispatch({
         type: GET_DETAIL,
         payload: jsonPokemonID.data,
       });
     } catch (error) {
-      console.log(error.message);
       return alert(`No encontramos Pokemon con el ID ${id}.`);
     }
   };
