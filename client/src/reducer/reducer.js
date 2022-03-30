@@ -74,16 +74,24 @@ function rootReducer(state = initialState, action) {
       };
 
     case FILTER_BY_ORIGEN:
-      const filterOrigin = state.filter;
-      const filterByOrigin =
-        action.payload === "createdPokemon"
-          ? filterOrigin.filter((e) => e.createdPokemon === true)
-          : action.payload === "allOrigin"
-          ? state.filter
-          : filterOrigin.filter((e) => !e.createdPokemon);
+      let value = action.payload;
+      // console.log(action)
+      const filterByOrigin = state.pokemons.filter((pokemon) => {
+        // console.log(typeof pokemon.id === "string")
+
+        let resultado =
+          value === "pokemonApi"
+            ? pokemon.id < 1125
+            : value === "createdPokemon"
+            ? pokemon.id > 1126
+            : false;
+        // console.log(resultado)
+        return resultado;
+      });
+      // console.log(filterByOrigin)
       return {
         ...state,
-        backUp: filterByOrigin,
+        backUp: value === "allOrigin" ? state.pokemons : filterByOrigin,
       };
 
     case ORDER_BY_NAME:
