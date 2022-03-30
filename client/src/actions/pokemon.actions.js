@@ -60,7 +60,7 @@ export function getPokemonId(id) {
       let jsonPokemonID = await axios.get(
         `http://localhost:3001/pokemon/${id}`
       );
-      console.log(jsonPokemonID);
+      // console.log(jsonPokemonID);
       return dispatch({
         type: GET_DETAIL,
         payload: jsonPokemonID.data,
