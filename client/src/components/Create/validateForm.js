@@ -79,5 +79,9 @@ export function validate(input) {
       "El valor ingresado debe ser solo numero. ¡Intenta de nuevo!";
   }
 
+  if (!input.type) {
+    errors.types = "Debes seleccionar al menos un Typo.";
+  }
+
   return errors;
 }
