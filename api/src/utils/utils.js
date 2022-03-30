@@ -18,6 +18,7 @@ let apiPokemon = async () => {
           id: pokemonSaved.data.id,
           image: pokemonSaved.data.sprites.other.home.front_default,
           types: pokemonSaved.data.types.map((e) => e.type.name),
+          attack: pokemonSaved.data.stats[1].base_stat,
         });
       });
       return pokemonApi;
@@ -38,7 +39,7 @@ const dbPokemon = async () => {
       include: [
         {
           model: Types,
-          as: "Types",
+          as: "types",
           attributes: ["name"],
           through: {
             attributes: [],
@@ -47,7 +48,7 @@ const dbPokemon = async () => {
       ],
 
       through: { attributes: ["name"] },
-      attributes: ["id", "name", "image"],
+      attributes: ["id", "name", "image", "attack"],
     });
 
     if (dbInfo) return dbInfo;
@@ -83,7 +84,7 @@ const searchByName = async (name) => {
       include: [
         {
           model: Types,
-          as: "Types",
+          as: "types",
           attributes: ["name"],
           through: {
             attributes: [],
@@ -91,7 +92,7 @@ const searchByName = async (name) => {
         },
       ],
       through: { attributes: ["name"] },
-      attributes: ["id", "name", "image"],
+      attributes: ["id", "name", "image", "attack"],
     });
     // console.log("--FLAG SEARCH NAME DB--");
     if (findNamePokemon) {
@@ -107,6 +108,7 @@ const searchByName = async (name) => {
         image: pokeNameAPI.data.sprites.other.home.front_default,
         name: pokeNameAPI.data.name,
         types: pokeNameAPI.data.types.map((t) => t.type.name),
+        attack: pokeNameAPI.data.stats[1].base_stat,
       };
       // console.log(nameAPIPokemon);
 
@@ -126,23 +128,15 @@ const allPokeId = async (id) => {
     res.send("Error: Falta el número de ID para buscar. ¡Intenta de nuevo!");
   } else if (id.length > 4) {
     res.send(`Error: El ID debe ser más corto.`);
-  } else if (!id === /[A-Za-z0-9]/) {
-    res.send(
-      `El ID solo esta compuesto por un numero o un numero y la sigla "db`
-    );
   }
   try {
-    if (id.includes("db")) {
+    if (id > 1125) {
       try {
-        id.replace(/[0-9]/g, "").trim().slice(0, -2);
-        id = parseInt(id);
-        // console.log(id);
-
         let dbPokemonById = await Pokemon.findByPk(id, {
           include: [
             {
               model: Types,
-              as: "Types",
+              as: "types",
               attributes: ["name"],
               through: {
                 attributes: [],

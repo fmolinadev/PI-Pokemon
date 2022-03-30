@@ -23,10 +23,10 @@ module.exports = (sequelize) => {
         },
       },
       image: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING(2000),
         allowNull: true,
         validate: { isUrl: true },
-        defaultValue: "https://imgur.com/R1WxMTs",
+        defaultValue: "https://i.imgur.com/R1WxMTs.png",
       },
       life: {
         type: DataTypes.INTEGER,
