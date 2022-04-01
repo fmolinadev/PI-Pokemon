@@ -38,18 +38,8 @@ const getID = async (req, res) => {
 //////////////////////////////POST/////////////////////////////////////
 var idReference = 1126;
 const postPokemon = async (req, res) => {
-  const {
-    name,
-    life,
-    image,
-    attack,
-    defense,
-    speed,
-    height,
-    weight,
-    typeA,
-    typeB,
-  } = req.body;
+  const { name, life, image, attack, defense, speed, height, weight, types } =
+    req.body;
   //Valido todo:
   if (!Object.keys(req.body).length)
     return res
@@ -84,7 +74,10 @@ const postPokemon = async (req, res) => {
       weight: weight,
     });
     //Le paso el Types:
-    if (typeA) {
+    let addTypes = await Types.findAll({ where: { name: types } });
+    await newPokemon.setTypes(addTypes);
+
+    /*  if (typeA) {
       let pokemonType1BD = await Types.findAll({ where: { name: typeA } });
       await newPokemon.addTypes(pokemonType1BD);
     }
@@ -95,7 +88,7 @@ const postPokemon = async (req, res) => {
       return res.send(
         `El Pokemon ${newPokemon.name} debe tener al menos un tipo. Verifica los datos ingresados.`
       );
-    }
+    } */
 
     /* let pokeIdDb = await Pokemon.findOne({
       where: { id: newPokemon.id },
