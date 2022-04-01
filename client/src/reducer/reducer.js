@@ -20,6 +20,7 @@ const initialState = {
   filter: [],
   detail: {},
   backUp: [],
+  errorRender: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -30,6 +31,7 @@ function rootReducer(state = initialState, action) {
         pokemons: action.payload,
         backUp: action.payload,
         filter: action.payload,
+        errorRender: action.payload,
       }; //retorno la copia del estado y paso el action.
 
     case GET_BY_NAME:
@@ -135,7 +137,8 @@ function rootReducer(state = initialState, action) {
     case RESET:
       return {
         ...state,
-        pokemon: [],
+
+        backUp: [],
       };
 
     case RESET_DETAIL:
