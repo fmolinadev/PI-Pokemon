@@ -164,5 +164,7 @@ export function filterByTypes(payload) {
   } catch (error) {
     console.log(error);
     return alert("Error: falló el filtro de este Type. ¡Intenta de nuevo!");
-  }
+  } /* finally {
+    return alert("Error: falló el filtro de este Type. ¡Intenta de nuevo!");
+  } */
 }
