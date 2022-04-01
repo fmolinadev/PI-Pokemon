@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Pokemon } from "../Pokemon/Pokemon";
-import { Aside as Filter } from "../Aside/Aside";
+// import { Aside as Filter } from "../Aside/Aside";
 import {
   getAllPokemon,
   getTypes,
   resetDetail,
 } from "../../actions/pokemon.actions";
 import { Loading } from "../Loading/Loading";
-import { ErrorPage } from "../ErrorPage/ErrorPage";
+// import { ErrorPage } from "../ErrorPage/ErrorPage";
 import "./AllPokemonStyles.css";
 import { Link } from "react-router-dom";
 
 export function AllPokemon() {
   let dispatch = useDispatch();
   let allPokemon = useSelector((state) => state.backUp);
+  let errorRender = useSelector((state) => state.errorRender);
 
   const [counterPokemon, setCounterPokemon] = useState(1);
   const [pokemonPerPage /* setPokemonPerPage */] = useState(12);
@@ -59,20 +60,19 @@ export function AllPokemon() {
     dispatch(getTypes());
   }, [dispatch]);
 
-  if (!pokemonData) {
+  if (errorRender.length === 0) {
     return (
       <div>
-        <div>
-          <ErrorPage />
-        </div>
+        <Loading />
       </div>
     );
-  } else if (pokemonData.length) {
+  } else {
     return (
       <div>
-        <Filter />
-        <div className="main-pokemons-card">
-          {pokemonData &&
+        <div class="main-pokemons-card">
+          {pokemonData.length === 0 ? (
+            <p>Ups! No se encontraron Pokémones con estas caracteristicas.</p>
+          ) : (
             pokemonData.map((p, index) => (
               <Link key={index} to={"/pokemon/" + p.id}>
                 <Pokemon
@@ -87,31 +87,26 @@ export function AllPokemon() {
                   id={p.id}
                 />
               </Link>
-            ))}
+            ))
+          )}
         </div>
-        <div className="pagination">
-          <button onClick={begin} className="pagination-button b">
+        <div class="pagination">
+          <button onClick={begin} class="pagination-button">
             {"<"}
           </button>
-          <button onClick={back} className="pagination-button a">
+          <button onClick={back} class="pagination-button a">
             Anterior
           </button>
           <p>
             {counterPokemon} de {indexPages}
           </p>
-          <button onClick={next} className="pagination-button p">
+          <button onClick={next} class="pagination-button p">
             Proximo
           </button>
-          <button onClick={end} className="pagination-button e">
+          <button onClick={end} class="pagination-button">
             {">"}
           </button>
         </div>
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <Loading />
       </div>
     );
   }

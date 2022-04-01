@@ -4,7 +4,10 @@ import { ErrorAlert } from "../ErrorAlert/ErrorAlert";
 export function ErrorPage() {
   return (
     <div>
-      <ErrorAlert msg="Ups! Algo salio mal." code="404" />
+      <ErrorAlert
+        msg="Ups! Algo salio mal al cargar la informacion."
+        code="404"
+      />
     </div>
   );
 }

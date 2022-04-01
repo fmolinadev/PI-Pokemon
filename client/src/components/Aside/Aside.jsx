@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getTypes,
   filterByOrigin,
   filterByTypes,
   orderByName,
   orderByAttack,
-  getAllPokemon,
   resetDetail,
 } from "../../actions/pokemon.actions";
 import "./AsideStyles.css";
@@ -25,9 +23,7 @@ export function Aside(setCounterPokemon) {
 
   //Funcion de reseteo a los filtros/orden:
   function handleReset(e) {
-    e.preventDefault();
-    dispatch(getTypes());
-    dispatch(getAllPokemon());
+    window.location.reload();
   }
 
   //Filtrado por el origen

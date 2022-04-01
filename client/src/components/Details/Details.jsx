@@ -48,7 +48,11 @@ export function Details() {
                 class="pokeImage"
               />
             </div>
-            <div class="types">{onePokemon.types}</div>
+            <div class="types">
+              {onePokemon.types
+                ? onePokemon.types.map((e) => "  " + e).join(",")
+                : onePokemon.types}
+            </div>
             <div class="description">
               <div>
                 <h4>{`Vida: ${onePokemon.life} hp`}</h4>

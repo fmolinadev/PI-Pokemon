@@ -16,16 +16,17 @@ export function SearchBar() {
   //Handle del serach
   function handleSubmit(e) {
     e.preventDefault();
-    if (!name || name === "" || !name.trim().length) {
-      setName("");
+    /* if (!name || name === "" || !name.trim().length) {
       return;
-    }
+    } */
     dispatch(getPokemonName(name.toLowerCase()));
+    setName("");
   }
 
   return (
     <div class="search-container">
       <input
+        value={name}
         class="input-search"
         onChange={(e) => handleInputChange(e)}
         type="text"

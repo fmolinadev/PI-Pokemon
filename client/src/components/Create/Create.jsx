@@ -29,8 +29,7 @@ export function Create() {
     speed: ``,
     height: ``,
     weight: ``,
-    typeA: ``,
-    typeB: ``,
+    types: [],
   });
 
   useEffect(() => {
@@ -44,6 +43,17 @@ export function Create() {
     setErrorForm(validate({ ...input, [e.target.name]: e.target.value }));
   };
 
+  const handleDeleteType = (el) => {
+    setInput({
+      ...input,
+      types: input.types.filter((type) => type !== el),
+    });
+  };
+
+  const handleTypesChange = (e) => {
+    setInput({ ...input, types: [...input.types, e.target.value] });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
@@ -51,9 +61,11 @@ export function Create() {
         (e) => e.name.toLowerCase() === input.name.toLowerCase()
       );
 
-      if (!findName)
+      if (!findName) {
         return alert("Ya existe un pokemon con este nombre. ¡Cambialo!");
-      else {
+      } else if (Object.keys(errors).length) {
+        return alert(Object.values(errors));
+      } else {
         const newPokemon = {
           name: input.name,
           life: input.life,
@@ -62,8 +74,7 @@ export function Create() {
           speed: input.speed,
           height: input.height,
           weight: input.weight,
-          typeA: input.typeA,
-          typeB: input.typeB,
+          types: input.types,
           createdPokemon: true,
         };
         // console.log(newPokemon);
@@ -78,9 +89,9 @@ export function Create() {
         speed: ``,
         height: ``,
         weight: ``,
-        typeA: ``,
-        typeB: ``,
+        types: ``,
       });
+
       return (
         alert(`El Pokémon fue creado con éxito.`), navigate(`/pokemon/index`)
       );
@@ -91,7 +102,7 @@ export function Create() {
       );
     }
   };
-
+  console.log(input);
   return (
     <div class="create_container">
       <header>
@@ -108,7 +119,6 @@ export function Create() {
               name="name"
               type="text"
               placeholder="¿Cómo se llama el Pokémon?..."
-              required
             />
             {errors.name && (
               <div class="errors">
@@ -125,7 +135,6 @@ export function Create() {
               type="number"
               min="1"
               placeholder="Vida..."
-              required
             />
             {errors.life && (
               <div class="errors">
@@ -142,7 +151,6 @@ export function Create() {
               type="number"
               min="1"
               placeholder="Poder de ataque..."
-              required
             />
             {errors.attack && (
               <div class="errors">
@@ -159,7 +167,6 @@ export function Create() {
               type="number"
               min="1"
               placeholder="Poder de defensa.."
-              required
             />
             {errors.defense && (
               <div class="errors">
@@ -176,7 +183,6 @@ export function Create() {
               type="number"
               min="1"
               placeholder="Inserta su velocidad..."
-              required
             />
             {errors.speed && (
               <div class="errors">
@@ -193,7 +199,6 @@ export function Create() {
               type="number"
               min="1"
               placeholder="Inserta el peso (en kg)"
-              required
             />
             {errors.weight && (
               <div class="errors">
@@ -210,7 +215,6 @@ export function Create() {
               type="number"
               min="1"
               placeholder="Inserta el tamaño (cm)"
-              required
             />
             {errors.height && (
               <div class="errors">
@@ -235,31 +239,41 @@ export function Create() {
           </div>
           <div>
             <label>Tipos</label>
+            {input.types.length === 0 ? (
+              <p>Seleciona dos tipos! </p>
+            ) : input.types.length > 2 ? (
+              <p> Maximos Tipos: 2 </p>
+            ) : null}
             <select
-              value={input.typeA}
-              name="typeA"
-              onChange={handleInputChange}
-              required
+              value={input.types}
+              name="types"
+              onChange={handleTypesChange}
             >
-              <option value="typeA">Primer tipo</option>
-              {stateTypes.map((t) => (
-                <option value={t.name} key={t.id}>
-                  {t.name}
-                </option>
-              ))}
+              <option value="types">-Tipos--</option>
+              {stateTypes.length > 0 &&
+                stateTypes
+                  .sort(function (a, b) {
+                    if (a.name < b.name) return -1;
+                    if (a.name > b.name) return 1;
+                    return 0;
+                  })
+                  .map((t) => (
+                    <option value={t.name} key={t.id}>
+                      {t.name}
+                    </option>
+                  ))}
             </select>
-            <select
-              value={input.typeB}
-              name="typeB"
-              onChange={handleInputChange}
-            >
-              <option value="StypeB">Segundo tipo</option>
-              {stateTypes.map((t) => (
-                <option value={t.name} key={t.id}>
-                  {t.name}
-                </option>
-              ))}
-            </select>
+
+            <div>
+              <h5>
+                {input.types?.map((el) => (
+                  <p>
+                    {el}
+                    <button onClick={(e) => handleDeleteType(el)}>X</button>
+                  </p>
+                ))}
+              </h5>
+            </div>
           </div>
         </div>
         <button class="btn-create" type="submit">
