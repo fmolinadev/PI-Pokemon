@@ -5,7 +5,6 @@ import { Home } from "./components/HomePage/HomePage.jsx";
 import { Create } from "./components/Create/Create.jsx";
 import { Details } from "./components/Details/Details.jsx";
 import { ErrorPage } from "./components/ErrorPage/ErrorPage.jsx";
-import "./App.css";
 
 function App() {
   return (

@@ -1,21 +1,18 @@
-.footer-container{
+.footer-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  border-top: #C2BDBD solid 2px;
+  padding-top: 11px;
+  border-top: #c2bdbd solid 2px;
   background-color: #ffffff;
   position: relative;
   bottom: 0;
   width: 100%;
   height: 40px;
-
-  
 }
-.footer-span{
+.footer-span {
   font-weight: 600;
   color: #181818;
-  margin-top: 15px;
+  margin-top: 10px;
   font-size: 12px;
 }

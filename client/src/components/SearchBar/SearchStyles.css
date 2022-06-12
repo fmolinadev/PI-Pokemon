@@ -1,6 +1,5 @@
-
-.btn-search{
-border-radius: 5px;
+.btn-search {
+  border-radius: 5px;
   font-size: 14px;
   font-weight: 600;
   font-family: "Rubik", sans-serif;
@@ -13,23 +12,21 @@ border-radius: 5px;
   transition: 0.3s ease-in-out;
 }
 
-.btn-search:hover{
-   color: #F6CF3A;
+.btn-search:hover {
+  color: #f6cf3a;
 }
 
-.input-search{
-width:230px;
-color: #1b1b1b;
-font-size: 12px;
-font-weight: 600;
-font-family: "Rubik", sans-serif;
-background: none;
-padding: 9px;
-border: solid 1px;
-border-color: #1a58a5;
-border-radius: 5px;
-
-
+.input-search {
+  width: 230px;
+  color: #1b1b1b;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: "Rubik", sans-serif;
+  background: none;
+  padding: 9px;
+  border: solid 1px;
+  border-color: #1a58a5;
+  border-radius: 5px;
 }
 
 .input-search::placeholder {

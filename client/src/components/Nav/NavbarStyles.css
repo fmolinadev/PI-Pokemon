@@ -1,25 +1,21 @@
-.nav-container{
-  position: relative;
-  width: 100%;
-  height: 64px;
+.nav-container {
   background-color: #f7f7f7;
-  border-bottom: #C2BDBD solid 2px;
+  border-bottom: #c2bdbd solid 2px;
 }
 
-
-.all-li{
+.all-li {
   padding-left: 20px;
-  padding-top: 16px;
+  padding-top: 19px;
 }
 
-.search-container{
+.search-container {
   float: right;
   position: relative;
-  top:-48px;
+  top: -25px;
   padding-right: 20px;
 }
 
-.link-route{
+.link-route {
   display: inline;
   color: #1a58a5;
   padding-left: 10px;
@@ -31,18 +27,19 @@
   font-family: "Rubik", sans-serif;
 }
 
-.link-route:hover{
-text-decoration: underline 2px solid;
-text-decoration-color: #F6CF3A;
+.link-route:hover {
+  text-decoration: underline 2px solid;
+  text-decoration-color: #f6cf3a;
 }
 
-.logo-pokemon{
+.logo-pokemon {
   position: relative;
-	top:-38px;
-  width: 200px;
-  height: 70px;
+  top: -36px;
+  max-height: 45px;
+  margin-top: 4px;
 }
 
-.branding{
-	text-align:center;
+.branding {
+  text-align: center;
+  margin-bottom: -30px;
 }
