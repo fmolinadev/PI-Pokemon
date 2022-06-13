@@ -6,6 +6,7 @@ import {
   orderByName,
   orderByAttack,
   resetDetail,
+  reset,
 } from "../../actions/pokemon.actions";
 import "./AsideStyles.css";
 
@@ -22,8 +23,8 @@ export function Aside(setCounterPokemon) {
   }, [dispatch]);
 
   //Funcion de reseteo a los filtros/orden:
-  function handleReset(e) {
-    window.location.reload();
+  function handleReset() {
+    dispatch(reset());
   }
 
   //Filtrado por el origen
