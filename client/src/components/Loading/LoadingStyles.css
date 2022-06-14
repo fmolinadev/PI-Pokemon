@@ -1,13 +1,14 @@
-.loader-container{
-   display: flex;
-   padding-top: 7%;
-   padding-bottom: 7%;
+.loader-container {
+  display: flex;
+  padding-top: 7%;
+  padding-bottom: 7%;
+  padding-right: -80px;
 }
 
-.loading-img{
+.loading-img {
   margin: auto;
   width: 280px;
   height: 280px;
   padding-bottom: 7px;
-  padding-right: -50px;
+  padding-right: -80px;
 }

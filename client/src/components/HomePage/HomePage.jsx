@@ -9,9 +9,7 @@ export function Home() {
       <NavBar />
       <Filter />
       <AllPokemon />
-      <div>
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 }

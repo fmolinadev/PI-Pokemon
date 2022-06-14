@@ -1,0 +1,23 @@
+.searchError {
+  display: block;
+  margin: auto;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  margin-left: 190px;
+}
+
+.searchError-pokedex {
+  margin-top: 13px;
+  margin-left: 20px;
+  display: flex;
+  right: -45%;
+  max-width: 450px;
+}
+
+.searchError-msg-error {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  font-family: "Rubik", sans-serif;
+}

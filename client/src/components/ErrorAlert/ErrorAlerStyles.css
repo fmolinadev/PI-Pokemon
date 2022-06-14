@@ -1,28 +1,24 @@
-.error_container{
-    display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+.error_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.gifRocket{
-    width: 500px;
-    height: 300px
+.gifRocket {
+  width: 500px;
+  height: 300px;
 }
 
-.error{ 
-    font-size: 30px;
-    font-weight: 700;
-    margin-bottom: 25px;
-    font-family: "Rubik", sans-serif;
+.error {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  font-family: "Rubik", sans-serif;
 }
 
-.spanError{
-    
-}
-
-.btn-goHome{
-border-radius: 5px;
+.btn-goHome {
+  border-radius: 5px;
   font-size: 14px;
   font-weight: 600;
   font-family: "Rubik", sans-serif;
@@ -35,6 +31,6 @@ border-radius: 5px;
   transition: 0.3s ease-in-out;
 }
 
-.btn-goHome:hover{
-   color: #F6CF3A;
+.btn-goHome:hover {
+  color: #f6cf3a;
 }

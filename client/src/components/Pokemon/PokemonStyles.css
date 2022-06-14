@@ -1,14 +1,14 @@
-.card-pokemon-container{
+.card-pokemon-container {
   width: 160px;
   height: 160px;
-  border-radius: 10px;
+  border-radius: 20px;
   background-color: #1a58a5;
   box-shadow: 5px 2px 18px -3px rgba(110, 110, 110, 0.11);
   position: relative;
   margin-top: 25px;
 }
 
-.poke-img{
+.poke-img {
   max-width: 70px;
   max-height: 70px;
   margin: auto;
@@ -16,24 +16,27 @@
   display: block;
 }
 
-.poke-name{
- font-family: "Rubik", sans-serif;
+.poke-name {
+  font-family: "Rubik", sans-serif;
   text-decoration: "inherit";
+  text-transform: capitalize;
   cursor: pointer;
-  color: #FFFF;
+  color: #ffff;
   text-align: center;
   font-size: 16px;
 }
 
-.poke-name:hover{
-    color: #F6CF3A
+.poke-name:hover {
+  color: #f6cf3a;
+  text-decoration: none;
 }
 
-.poke-types{
+.poke-types {
   font-family: "Rubik", sans-serif;
   font-size: 13px;
-  color: #F6CF3A;
+  color: #f6cf3a;
   text-decoration: inherit;
   text-align: center;
   margin: auto;
+  text-transform: capitalize;
 }

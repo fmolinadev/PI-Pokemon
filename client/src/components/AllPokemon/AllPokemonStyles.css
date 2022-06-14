@@ -1,5 +1,4 @@
 .main-pokemons-card {
-  box-sizing: border-box;
   display: grid;
   place-content: right;
   left: -21px;
@@ -9,6 +8,7 @@
 
 .pagination {
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
   font-weight: bold;
@@ -23,7 +23,7 @@
   color: #ffff;
   border-color: #1a58a5;
   background-color: #1a58a5;
-  border-radius: 8px;
+  border-radius: 25px;
   border: 1px solid;
 }
 

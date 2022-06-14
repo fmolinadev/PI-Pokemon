@@ -1,80 +1,90 @@
-.background{
-    background-image: url(../../assets/Pueblo_Paleta_Back.png);
-      background-repeat: no-repeat;
-    background-position: 70% 0;
-    background-size: cover;
+.background {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url(../../assets/Pueblo_Paleta_Back.png);
+  background-repeat: no-repeat;
+  background-position: 70% 0;
+  background-size: cover;
+  width: 100%;
 }
 
-.cardsDetails{
-    background: rgba(255, 255, 255, 0.808);
-    max-width: 700px;
-    height: 480px;
-    margin-right: 30%;
-    margin-left: 30%;
-    display:inherit;
-    box-shadow: 4px 4px .6em #104890, -5px 0 .6em #F6CF3A;
-    margin-top: 1px;
+.container-name {
+  margin-left: 27%;
+  text-align: center;
+  text-transform: capitalize;
+  font-family: "Rubik", sans-serif;
+  color: white;
 }
 
-.pokeName{
-    font-family: "Rubik", sans-serif;
-    text-align: center;
-    font-weight: bold;
-    font-size: 25px;
-    margin-top: 14px;
-    padding-top: 16px;
+.container-main {
+  display: grid;
+  grid-template-columns: 2fr 8fr;
+  align-items: center;
 }
 
-.types{
-    display: flex;
-    flex-direction: column;
-    margin-left: 82%;
-    margin-top: 3px;
-    font-weight: bold;
-    font-size: 10px;
+.container-left {
+  margin: auto;
+  margin-left: 290px;
+  text-align: center;
 }
 
-.pokeImage {
-    max-width: 200px;
-    max-height: 200px;
-   margin: auto;
-   padding-left: 180px;
-    position: relative;
+.container-left img {
+  max-width: 280px;
 }
 
-.description{
-    font-family: "Rubik", sans-serif;
-  text-decoration: "inherit";
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 0.2fr;
-    grid-column-gap: 3px;
-    grid-row-gap: 2px;
-    margin-left: 23%;
-}
-
-.button-home{
-    padding: 12px 25px 12px 25px;
-    font-size: 12px;
+.container-left p {
+  font-size: 18px;
+  text-transform: capitalize;
+  font-family: "Rubik", sans-serif;
+  color: white;
   font-weight: 600;
-    font-family: "Rubik", sans-serif;
-    text-emphasis-color: #FFFF;
-    background: #1a58a5;
-    margin-left: 45%;
-    margin-top: 1.5%;
-    border-radius: 5px;
-    border: none;
+}
+
+.container-right {
+  margin-top: 35px;
+  text-align: center;
+  margin-right: 250px;
+}
+
+.container-right h4 {
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: white;
+  padding: 1px 2px;
+  text-transform: capitalize;
+}
+
+.container-button {
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 12px;
+  margin-top: 10px;
+  text-align: center;
+  align-items: center;
+  justify-items: center;
+}
+
+.button-home {
+  padding: 12px 25px 12px 25px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: "Rubik", sans-serif;
+  text-emphasis-color: #ffff;
+  background: #1a58a5;
+  border-radius: 5px;
+  border: none;
   cursor: pointer;
-  padding: 9px;
+  padding: 12px;
+  margin-left: 6px;
+  margin-right: 6px;
   transition: 0.3s ease-in-out;
 }
 
-.linked{
-text-decoration: none;
-color: #FFFF;
+.linked {
+  text-decoration: none;
+  color: #ffff;
 }
 
-.linked:hover{
-   color: #F6CF3A;
-   
+.linked:hover {
+  color: #f6cf3a;
 }

@@ -36,56 +36,40 @@ export function Details() {
     return (
       <div class="background">
         <NavBar />
-        <div>
-          <div class="cardsDetails">
-            <div>
-              <h3 class="pokeName">
-                {`#${onePokemon.id}:`} {onePokemon.name}
-              </h3>
-              <img
-                src={onePokemon.image}
-                alt={onePokemon.name}
-                class="pokeImage"
-              />
-            </div>
-            <div class="types">
+        <div class="container-name">
+          <h3>
+            {`#${onePokemon.id}`} {onePokemon.name}
+          </h3>
+        </div>
+        <div class="container-main">
+          <div class="container-left">
+            <img src={onePokemon.image} alt={onePokemon.name} />
+            <p>
               {onePokemon.types
                 ? onePokemon.types.map((e) => "  " + e).join(",")
                 : onePokemon.types}
-            </div>
-            <div class="description">
-              <div>
-                <h4>{`Vida: ${onePokemon.life} hp`}</h4>
-              </div>
-              <div>
-                <h4>{`Ataque: ${onePokemon.attack} Pw`}</h4>
-              </div>
-              <div>
-                <h4>{`Defensa: ${onePokemon.defense} Pw`}</h4>
-              </div>
-              <div>
-                <h4>{`Velocidad: ${onePokemon.speed} km/h`}</h4>
-              </div>
-              <div>
-                <h4>{`Altura: ${onePokemon.height} cm`}</h4>
-              </div>
-              <div>
-                <h4>{`Peso: ${onePokemon.weight} kg`}</h4>
-              </div>
-            </div>
+            </p>
           </div>
-          <div>
-            <button class="button-home">
-              <Link to="/pokemon/index" class="linked">
-                Volver al inicio
-              </Link>
-            </button>
-            <button class="button-home">
-              <Link to="/create" class="linked">
-                Crear un Pokémon
-              </Link>
-            </button>
+          <div class="container-right">
+            <h4>{`Vida: ${onePokemon.life} hp`}</h4>
+            <h4>{`Ataque: ${onePokemon.attack} Pw`}</h4>
+            <h4>{`Defensa: ${onePokemon.defense} Pw`}</h4>
+            <h4>{`Velocidad: ${onePokemon.speed} km/h`}</h4>
+            <h4>{`Altura: ${onePokemon.height} cm`}</h4>
+            <h4>{`Peso: ${onePokemon.weight} kg`}</h4>
           </div>
+        </div>
+        <div class="container-button">
+          <button class="button-home">
+            <Link to="/pokemon/index" class="linked">
+              Volver al inicio
+            </Link>
+          </button>
+          <button class="button-home">
+            <Link to="/create" class="linked">
+              Crear un Pokémon
+            </Link>
+          </button>
         </div>
         <Footer />
       </div>

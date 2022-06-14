@@ -11,6 +11,7 @@ import { Loading } from "../Loading/Loading";
 // import { ErrorPage } from "../ErrorPage/ErrorPage";
 import "./AllPokemonStyles.css";
 import { Link } from "react-router-dom";
+import ErrorSearch from "../ErrorSearch/ErrorSearch";
 
 export function AllPokemon() {
   let dispatch = useDispatch();
@@ -71,7 +72,7 @@ export function AllPokemon() {
       <div>
         <div class="main-pokemons-card">
           {pokemonData.length === 0 ? (
-            <p>Ups! No se encontraron Pokémones con estas caracteristicas.</p>
+            <ErrorSearch />
           ) : (
             pokemonData.map((p, index) => (
               <Link key={index} to={"/pokemon/" + p.id}>
