@@ -40,7 +40,7 @@ export function Create() {
 
   const handleInputChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
-    setErrorForm(validate({ ...input, [e.target.name]: e.target.value }));
+    // setErrorForm(validate({ ...input, [e.target.name]: e.target.value }));
   };
 
   const handleDeleteType = (el) => {
