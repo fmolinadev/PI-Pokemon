@@ -75,7 +75,11 @@ export function AllPokemon() {
             <ErrorSearch />
           ) : (
             pokemonData.map((p, index) => (
-              <Link key={index} to={"/pokemon/" + p.id}>
+              <Link
+                key={index}
+                to={"/pokemon/" + p.id}
+                tyle={{ textDecoration: "inherit" }}
+              >
                 <Pokemon
                   key={index}
                   name={p.name}
