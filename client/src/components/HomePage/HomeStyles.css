@@ -1,9 +1,5 @@
 .home-container {
+  position: relative;
   max-width: 100vh;
   max-height: 100vh;
-  background-image: linear-gradient(
-    96.5deg,
-    rgba(39, 103, 187, 1) 10.4%,
-    rgba(16, 72, 144, 1) 87.7%
-  );
 }

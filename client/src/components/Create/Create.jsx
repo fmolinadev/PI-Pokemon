@@ -104,185 +104,195 @@ export function Create() {
   };
   console.log(input);
   return (
-    <div class="create_container">
-      <header>
-        <NavBar />
-      </header>
-      <h1 class="title">¡Crea un nuevo Pokémon!</h1>
-      <form class="form" onSubmit={handleSubmit}>
-        <div class="info-form">
-          <div>
-            <label>Nombre</label>
-            <input
-              onChange={handleInputChange}
-              value={input.name}
-              name="name"
-              type="text"
-              placeholder="¿Cómo se llama el Pokémon?..."
-            />
-            {errors.name && (
-              <div class="errors">
-                <div id="name">{errors.name}</div>
-              </div>
-            )}
-          </div>
-          <div>
-            <label>Vida</label>
-            <input
-              onChange={handleInputChange}
-              value={input.life}
-              name="life"
-              type="number"
-              min="1"
-              placeholder="Vida..."
-            />
-            {errors.life && (
-              <div class="errors">
-                <div>{errors.life}</div>
-              </div>
-            )}
-          </div>
-          <label>
-            Ataque
-            <input
-              onChange={handleInputChange}
-              value={input.attack}
-              name="attack"
-              type="number"
-              min="1"
-              placeholder="Poder de ataque..."
-            />
-            {errors.attack && (
-              <div class="errors">
-                <div>{errors.attack}</div>
-              </div>
-            )}
-          </label>
-          <div>
-            <label>Defensa</label>
-            <input
-              onChange={handleInputChange}
-              value={input.defense}
-              name="defense"
-              type="number"
-              min="1"
-              placeholder="Poder de defensa.."
-            />
-            {errors.defense && (
-              <div class="errors">
-                <div>{errors.defense}</div>
-              </div>
-            )}
-          </div>
-          <div>
-            <label>Velocidad</label>
-            <input
-              onChange={handleInputChange}
-              value={input.speed}
-              name="speed"
-              type="number"
-              min="1"
-              placeholder="Inserta su velocidad..."
-            />
-            {errors.speed && (
-              <div class="errors">
-                <div>{errors.speed}</div>
-              </div>
-            )}
-          </div>
-          <div>
-            <label>Peso</label>
-            <input
-              onChange={handleInputChange}
-              value={input.weight}
-              name="weight"
-              type="number"
-              min="1"
-              placeholder="Inserta el peso (en kg)"
-            />
-            {errors.weight && (
-              <div class="errors">
-                <div>{errors.weight}</div>
-              </div>
-            )}
-          </div>
-          <div>
-            <label>Tamaño</label>
-            <input
-              onChange={handleInputChange}
-              value={input.height}
-              name="height"
-              type="number"
-              min="1"
-              placeholder="Inserta el tamaño (cm)"
-            />
-            {errors.height && (
-              <div class="errors">
-                <div>{errors.height}</div>
-              </div>
-            )}
-          </div>
-          <div>
-            <label>Imagen</label>
-            <input
-              onChange={handleInputChange}
-              value={input.image}
-              name="image"
-              type="url"
-              placeholder="Copia la url de la imagen..."
-            />
-            {errors.image && (
-              <div class="errors">
-                <div>{errors.image}</div>
-              </div>
-            )}
-          </div>
-          <div>
-            <label>Tipos</label>
-            {input.types.length === 0 ? (
-              <p>Seleciona dos tipos! </p>
-            ) : input.types.length > 2 ? (
-              <p> Maximos Tipos: 2 </p>
-            ) : null}
-            <select
-              value={input.types}
-              name="types"
-              onChange={handleTypesChange}
-            >
-              <option value="types">-Tipos--</option>
-              {stateTypes.length > 0 &&
-                stateTypes
-                  .sort(function (a, b) {
-                    if (a.name < b.name) return -1;
-                    if (a.name > b.name) return 1;
-                    return 0;
-                  })
-                  .map((t) => (
-                    <option value={t.name} key={t.id}>
-                      {t.name}
-                    </option>
-                  ))}
-            </select>
-
+    <div>
+      <NavBar />
+      <div class="create_container">
+        <h1 class="title">¡Crea un nuevo Pokémon!</h1>
+        <form class="form" onSubmit={(e) => handleSubmit(e)}>
+          <div class="info-form">
             <div>
-              <h5>
-                {input.types?.map((el) => (
-                  <p>
-                    {el}
-                    <button onClick={(e) => handleDeleteType(el)}>X</button>
-                  </p>
-                ))}
-              </h5>
+              <label>Nombre</label>
+              <input
+                onChange={handleInputChange}
+                value={input.name}
+                name="name"
+                type="text"
+                placeholder="¿Cómo se llama?"
+              />
+              {errors.name && (
+                <div class="errors">
+                  <div id="name">{errors.name}</div>
+                </div>
+              )}
+            </div>
+            <div>
+              <label>Vida</label>
+              <input
+                onChange={handleInputChange}
+                value={input.life}
+                name="life"
+                type="number"
+                min="1"
+                placeholder="Vida"
+              />
+              {errors.life && (
+                <div class="errors">
+                  <div>{errors.life}</div>
+                </div>
+              )}
+            </div>
+            <label>
+              Ataque
+              <input
+                onChange={handleInputChange}
+                value={input.attack}
+                name="attack"
+                type="number"
+                min="1"
+                placeholder="Ataque..."
+              />
+              {errors.attack && (
+                <div class="errors">
+                  <div>{errors.attack}</div>
+                </div>
+              )}
+            </label>
+            <div>
+              <label>
+                Defensa
+                <input
+                  onChange={handleInputChange}
+                  value={input.defense}
+                  name="defense"
+                  type="number"
+                  min="1"
+                  placeholder="Defensa"
+                />
+              </label>
+              {errors.defense && (
+                <div class="errors">
+                  <div>{errors.defense}</div>
+                </div>
+              )}
+            </div>
+            <div>
+              <label>
+                Velocidad
+                <input
+                  onChange={handleInputChange}
+                  value={input.speed}
+                  name="speed"
+                  type="number"
+                  min="1"
+                  placeholder="Velocidad"
+                />
+              </label>
+              {errors.speed && (
+                <div class="errors">
+                  <div>{errors.speed}</div>
+                </div>
+              )}
+            </div>
+            <div>
+              <label>
+                Peso
+                <input
+                  onChange={handleInputChange}
+                  value={input.weight}
+                  name="weight"
+                  type="number"
+                  min="1"
+                  placeholder="Peso (en kg)"
+                />
+              </label>
+              {errors.weight && (
+                <div class="errors">
+                  <div>{errors.weight}</div>
+                </div>
+              )}
+            </div>
+            <div>
+              <label>
+                Tamaño
+                <input
+                  onChange={handleInputChange}
+                  value={input.height}
+                  name="height"
+                  type="number"
+                  min="1"
+                  placeholder="Tamaño (cm)"
+                />
+              </label>
+              {errors.height && (
+                <div class="errors">
+                  <div>{errors.height}</div>
+                </div>
+              )}
+            </div>
+            <div>
+              <label>
+                {input.types.length === 0 ? (
+                  <p>Seleciona dos tipos: </p>
+                ) : input.types.length > 2 ? (
+                  <p> Maximos Tipos: 2 </p>
+                ) : null}
+              </label>
+              <select
+                value={input.types}
+                name="types"
+                onChange={handleTypesChange}
+              >
+                <option value="types">Tipos</option>
+                {stateTypes.length > 0 &&
+                  stateTypes
+                    .sort(function (a, b) {
+                      if (a.name < b.name) return -1;
+                      if (a.name > b.name) return 1;
+                      return 0;
+                    })
+                    .map((t) => (
+                      <option value={t.name} key={t.id}>
+                        {t.name}
+                      </option>
+                    ))}
+              </select>
+
+              <div>
+                <h5 class="type-container">
+                  {input.types?.map((el) => (
+                    <p>
+                      {el}
+                      <button onClick={(e) => handleDeleteType(el)}>X</button>
+                    </p>
+                  ))}
+                </h5>
+              </div>
+            </div>
+            <div>
+              <label>
+                Imagen
+                <input
+                  onChange={handleInputChange}
+                  value={input.image}
+                  name="image"
+                  type="url"
+                  placeholder="Copia la url de la imagen..."
+                />
+              </label>
+              {errors.image && (
+                <div class="errors">
+                  <div>{errors.image}</div>
+                </div>
+              )}
             </div>
           </div>
+          <button class="btn-create" type="submit">
+            Crear Pokémon
+          </button>
+        </form>
+        <div class="footer-container">
+          <Footer />
         </div>
-        <button class="btn-create" type="submit">
-          Crear
-        </button>
-      </form>
-
-      <div>
-        <Footer />
       </div>
     </div>
   );

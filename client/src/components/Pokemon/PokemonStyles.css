@@ -2,10 +2,14 @@
   width: 160px;
   height: 160px;
   border-radius: 20px;
-  background-color: #1a58a5;
   box-shadow: 5px 2px 18px -3px rgba(110, 110, 110, 0.11);
   position: relative;
   margin-top: 25px;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url(../../assets/Laboratorio_pokemon.png);
+  background-repeat: no-repeat;
+  background-position: 80% 0;
+  background-size: cover;
 }
 
 .poke-img {

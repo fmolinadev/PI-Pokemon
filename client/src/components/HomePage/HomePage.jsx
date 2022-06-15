@@ -5,7 +5,7 @@ import { Aside as Filter } from "../Aside/Aside";
 
 export function Home() {
   return (
-    <div>
+    <div class="home-container">
       <NavBar />
       <Filter />
       <AllPokemon />
