@@ -21,7 +21,13 @@ export function NavBar() {
           </Link>
         </div>
         <div class="branding">
-          <img class="logo-pokemon" src={LogoPokemon} alt="Pokemon App Logo" />
+          <Link to="/pokemon/index" style={{ textDecoration: "inherit" }}>
+            <img
+              class="logo-pokemon"
+              src={LogoPokemon}
+              alt="Pokemon App Logo"
+            />
+          </Link>
         </div>
         <div class="search-container">
           <SearchBar />

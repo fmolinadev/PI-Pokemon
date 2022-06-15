@@ -138,6 +138,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         backUp: state.pokemons,
+        filter: [],
       };
 
     case RESET_DETAIL:
